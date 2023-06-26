@@ -7,7 +7,6 @@ import java.util.*
 
 var teclado = Scanner(System.`in`)
 var literal = Scanner(System.`in`);
-var floreria = Floreria()
 
 fun main(args: Array<String>) {
     mostrarMenuGeneral()
@@ -28,22 +27,25 @@ fun mostrarMenuGeneral(){
 }
 
 fun mostrarMenuFloreria(){
-    println("*REGISTRO DE FLORERIAS*")
-    println("1. Registrar floreria");
-    println("2. Listar florerias");
-    println("3. Eliminar floreria");
-    println("4. Salir");
-    println("Digite el literal deseado: ");
+    var floreria = Floreria()
     var opcion = literal.nextLine()
-    while(opcion!="4") {
+    do {
+        println("*REGISTRO DE FLORERIAS*")
+        println("1. Registrar floreria");
+        println("2. Listar floreriasLista");
+        println("3. Eliminar floreria");
+        println("4. Salir");
+        println("Digite el literal deseado: ");
+
+
         when (opcion) {
             "1" -> floreria.crearFloreria()
             "2" -> floreria.listarFlorerias()
-            "3" -> floreria.eliminarFloreria(teclado.nextLine())
+            "3" -> floreria.obtenerFloreriaNombre(teclado.nextLine())//floreria.eliminarFloreria(teclado.nextLine())
             else -> println("nose")
         }
-        mostrarMenuFloreria()
-    }
+    } while(opcion!="4")
+
 }
 
 fun mostrarMenuFlor(){
@@ -59,6 +61,8 @@ fun mostrarMenuFlor(){
         else -> println("chao")
     }
 }
+
+
 
 
 

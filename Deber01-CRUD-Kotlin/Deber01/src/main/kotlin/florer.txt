@@ -1,2 +1,1 @@
-NOMBRE: flor1, DIRECCION: fs, HORARIO: sdf, TELEFONO: sdf, HACE ENVIO?: true
-NOMBRE: , DIRECCION: flvd, HORARIO: df, TELEFONO: df, HACE ENVIO?: true
+flor1,trdgs,dgs,df,true
