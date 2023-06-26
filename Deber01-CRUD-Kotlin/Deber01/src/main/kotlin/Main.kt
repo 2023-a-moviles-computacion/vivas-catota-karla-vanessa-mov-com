@@ -1,4 +1,5 @@
 import java.io.File
+import java.io.InputStream
 import java.nio.file.Files.write
 import java.nio.file.StandardOpenOption
 import java.text.SimpleDateFormat
@@ -30,10 +31,15 @@ fun mostrarMenuFloreria(){
     println("2. Listar florerias");
     println("3. Eliminar floreria");
     println("Digite el literal deseado: ");
-    when(literal.nextLine()){
-        "1" ->  ingresarDatosFloreria();
-        "2" -> listarFlorerias()
-        else -> println("nose")
+    var opcion = literal.nextLine()
+    while(opcion!="4") {
+        when (opcion) {
+            "1" -> crearFloreria()
+            "2" -> listarFlorerias()
+            "3" -> eliminarFloreria(teclado.nextLine())
+            else -> println("nose")
+        }
+        mostrarMenuFloreria()
     }
 }
 
@@ -45,47 +51,10 @@ fun mostrarMenuFlor(){
     println("Digite el literal deseado: ");
     when(literal.nextLine()){
         "1" ->
-            ingresarDatosFlor();
-
+            crearFlor();
         else -> println("chao")
     }
 }
 
-fun ingresarDatosFloreria(): Floreria{
-    println("Ingrese el nombre: " );
-    var nombre: String = teclado.nextLine();
-    println("Ingrese el direccion: " );
-    var direccion: String = teclado.nextLine();
-    println("Ingrese el horario: " );
-    var horario: String = teclado.nextLine();
-    println("Ingrese el telefono: " );
-    var telefono: String = teclado.nextLine();
-    println("Ingrese si hace envio (1: Si, 0: No)");
-    var haceEnvio: Boolean = teclado.nextBoolean();
-    var floreria = Floreria(nombre, direccion, horario, telefono, haceEnvio)
-    println(floreria);
 
-    val archivo = File("src/main/kotlin/floreria.txt")
-    write(archivo.toPath(), floreria.toString().toByteArray(), StandardOpenOption.APPEND)
-    return floreria;
-}
 
-fun ingresarDatosFlor(): Unit{
-    println("Ingrese el nombre: " );
-    var nombre: String = teclado.nextLine();
-    println("Ingrese el color: " );
-    var color: String = teclado.nextLine();
-    println("Ingrese si es nativa: " );
-    var esNativa: Boolean = teclado.nextBoolean();
-    println("Ingrese la fecha de llegada: " );
-    var fechaLlegada: Date = SimpleDateFormat().parse(teclado.nextLine());
-
-    println("Ingrese el precio: ");
-    var precio: Double = teclado.nextDouble();
-    var flor = Flor(nombre, color, esNativa, fechaLlegada, precio)
-    println(flor);
-
-    val archivo = File("src/main/kotlin/flor.txt")
-    write(archivo.toPath(), flor.toString().toByteArray(), StandardOpenOption.APPEND)
-
-}
