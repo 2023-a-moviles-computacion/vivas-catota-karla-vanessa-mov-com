@@ -2,7 +2,6 @@ import java.io.File
 import java.io.IOException
 import java.util.*
 
-
 val archivoFlorerias = File("src/main/kotlin/florer.txt")
 var teclado = Scanner(System.`in`)
 var literal = Scanner(System.`in`);
@@ -30,18 +29,19 @@ fun mostrarMenuGeneral(){
         println("1. Registrar floreria");
         println("2. Listar florerias");
         println("3. Eliminar floreria");
-        println("4. Salir");
+        println("4. Actualizar floreria");
+        println("5. Salir");
         println("Digite el literal deseado: ");
         var opcion = literal.nextLine()
         when (opcion) {
             "1" -> registrarFloreria()
             "2" -> listarFlorerias()
             "3" -> eliminarFloreria()
-            "5" -> instanciarFloreria()
+            "4" -> actualizarFloreria()
             //"3" -> obtenerFloreriaNombre(teclado.nextLine())//floreria.eliminarFloreria(teclado.nextLine())
             else -> println("nose")
         }
-    } while(opcion!="4")
+    } while(opcion!="5")
 }
 
 fun mostrarMenuFlor(){
@@ -74,13 +74,11 @@ fun registrarFloreria(): Unit {
     var haceEnvio: Boolean = teclado.nextBoolean();
      floreria = Floreria(nombre, direccion, horario, telefono, haceEnvio)
     if (nombre.isNotBlank() && direccion.isNotBlank() && horario.isNotBlank() && telefono.isNotBlank()){
-        archivoFlorerias.appendText("$floreria\n")
+        archivoFlorerias.appendText( "\n$floreria")
+        //archivoFlorerias.appendText("\n"+floreria.toString())
     }else{
-        println("se creo la lista")
+        println("Datos invalidos!")
     }
-
-
-    //return floreria;
 }
 
 fun listarFlorerias(): Unit {
@@ -95,43 +93,61 @@ fun listarFlorerias(): Unit {
     }
 }
 
-fun instanciarFloreria(): MutableList<Floreria> {
-    var floreriasLineasLista: MutableList<String> = mutableListOf()
-    var floreriasLista: MutableList<Floreria> = mutableListOf()
-    if (archivoFlorerias.exists()  && archivoFlorerias.readText().isNotEmpty()) {
-
-        for (floreriaLinea in archivoFlorerias.readLines()) {
-            var lineas = floreriaLinea.split(",")
-            println(lineas[1])
-            //println(floreriasLista)
-            //var floreriaObjeto = Floreria(nombreL, direccionL, horarioL, telefonoL, haceEnvioL)
-            var floreriaObjeto = Floreria(lineas[0], lineas[1], lineas[2], lineas[3], lineas[4].toBoolean())
-            floreriasLista.add(floreriaObjeto)
-        }
-    }else{
-        println("No existe el archivo")
-    }
-    return floreriasLista
-}
-
-fun eliminarFloreria(){
-    println("Ingrese la floreria a borrar")
-    val textoABorrar = readLine()
+fun eliminarFloreria(): Unit{
+    println("Ingrese el nombre de la floreria a borrar")
+    val floreriaABorrar = readLine()
     try {
-        val archivo = File("src/main/kotlin/florer.txt")
-        val lineas: List<String> = archivo.readLines()
+        val lineas = archivoFlorerias.readLines()
         for (linea in lineas){
-            var florerias = linea.split(",")
-            var nombre = florerias[0]
-            if(textoABorrar == nombre){
+            var info = linea.split(",")
+            var nombre = info[0]
+            if(floreriaABorrar == nombre){
                     //val lineasActualizadas = lineas.filter { it != textoABorrar }
                     val lineasActualizadas = lineas.filter { !it.contains(nombre) }
-                    archivo.writeText(lineasActualizadas.joinToString("\n"))
+                    archivoFlorerias.writeText(lineasActualizadas.joinToString("\n"))
                     println("Objeto borrado del archivo correctamente.")
                 break
             }
         }
     } catch (ex: IOException) {
         println("Error al borrar el objeto del archivo: ${ex.message}")
+    }
+}
+
+fun actualizarFloreria(): Unit{
+    println("Ingrese el nombre de la floreria a actualizar")
+    val floreriaAActualizar = readLine()
+    try {
+        val lineas = archivoFlorerias.readLines().toMutableList()
+        for (linea in lineas){
+            var info = linea.split(",")
+            var nombre = info[0]
+            if(floreriaAActualizar == nombre){
+                //val lineasActualizadas = lineas.filter { it != textoABorrar }
+                val lineaPorActualizar = lineas.filter { it.contains(nombre) }
+                var numeroLinea = lineas.indexOf(linea)
+                println("DATOS:");
+                println("Ingrese el nombre: ");
+                var nombre: String = teclado.nextLine();
+                println("Ingrese el direccion: ");
+                var direccion: String = teclado.nextLine();
+                println("Ingrese el horario: ");
+                var horario: String = teclado.nextLine();
+                println("Ingrese el telefono: ");
+                var telefono: String = teclado.nextLine();
+                println("Ingrese si hace envio (1: Si, 0: No)");
+                var haceEnvio: Boolean = teclado.nextBoolean();
+
+                var infoNueva = Floreria(nombre, direccion, horario, telefono, haceEnvio)
+                lineas[numeroLinea]= infoNueva.toString()
+                archivoFlorerias.writeText(lineas.joinToString("\n"))
+                println("Objeto actualizado del archivo correctamente.")
+                break
+            }else{
+                println("Floreria no encontrada")
+            }
+        }
+    } catch (ex: IOException) {
+        println("Error al actualizar el objeto del archivo: ${ex.message}")
     }
 }
