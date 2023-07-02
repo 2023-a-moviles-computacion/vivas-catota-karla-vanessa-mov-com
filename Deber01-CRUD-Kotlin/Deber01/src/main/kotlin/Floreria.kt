@@ -3,7 +3,7 @@ import java.io.File
 import java.io.FileReader
 
 class Floreria {
-    val archivo = File("src/main/kotlin/florer.txt")
+
     //var Floreria: Int,
     var nombre: String
     var direccion: String
@@ -30,8 +30,7 @@ class Floreria {
     var floreriasLista = mutableListOf<Floreria>()
 
     init {
-        floreriasLista =
-            instanciarFloreria()
+          floreriasLista = instanciarFloreria()
     }
 
     override fun toString(): String {
@@ -39,18 +38,20 @@ class Floreria {
                 "," + direccion +
                 "," + horario +
                 "," + telefono +
-                "," + haceEnvio;
+                "," + haceEnvio
     }
+}
+/*
     fun instanciarFloreria(): MutableList<Floreria> {
         var floreriasLineasLista: MutableList<String> = mutableListOf()
         var floreriasLista: MutableList<Floreria> = mutableListOf()
-        if (archivo.exists() && archivo.length() >= 5) {
-            archivo.forEachLine { linea ->
+        if (archivoFlorerias.exists() && archivoFlorerias.length() >= 5) {
+            archivoFlorerias.forEachLine { linea ->
                 floreriasLineasLista.add(linea)
             }
             for (floreriaLinea in floreriasLineasLista) {
                 var lineas = floreriaLinea.split(",")
-                //println(lineas)
+                println(lineas)
                 //println(lineas[2])
 
                 //println( lineas[0] + lineas[1] + lineas[2] + lineas[3] + lineas[4].toBoolean())
@@ -69,59 +70,9 @@ class Floreria {
         return  floreriasLista
     }
 
-    fun crearFloreria(): Unit {
-        println("Ingrese el nombre: ");
-        var nombre: String = teclado.nextLine();
-        println("Ingrese el direccion: ");
-        var direccion: String = teclado.nextLine();
-        println("Ingrese el horario: ");
-        var horario: String = teclado.nextLine();
-        println("Ingrese el telefono: ");
-        var telefono: String = teclado.nextLine();
-        println("Ingrese si hace envio (1: Si, 0: No)");
-        var haceEnvio: Boolean = teclado.nextBoolean();
-        var floreria = Floreria(nombre, direccion, horario, telefono, haceEnvio)
-        /*
-        println(
-            "\n****" +
-                    "\nNOMBRE: " + floreria.nombre +
-                    " \nDIRECCION: " + floreria.direccion +
-                    " \nHORARIO: " + floreria.horario +
-                    " \nTELEFONO: " + floreria.telefono +
-                    " \nHACE ENVIO?: " + floreria.haceEnvio
-        )
-        */
+*/
 
-        // floreria.nombre);
-
-        //val archivo = File("src/main/kotlin/floreria.txt")
-        //write(archivo.toPath(), floreria.toString().toByteArray(), StandardOpenOption.APPEND)
-        //return floreria;
-
-        //instanciarFloreria().add(floreria.toString())
-
-        //val floreria = floreria.toString();
-        if (nombre.isNotBlank() && direccion.isNotBlank() && horario.isNotBlank() && telefono.isNotBlank()){
-            archivo.appendText("$floreria\n")
-        }else{
-            println("se creo la lista")
-        }
-
-
-        //return floreria;
-    }
-
-    fun listarFlorerias(): Unit {
-        val florerias = archivo.readLines()
-        if (archivo.exists()) {
-            println("**FLORERIAS**")
-            for (floreria in florerias) {
-                println(floreria)
-            }
-        } else {
-            println("No hay florerias registradas")
-        }
-    }
+/*
     fun obtenerFloreriaNombre(nombreFloreria: String): Floreria?{
         println(floreriasLista)
         floreriasLista.forEach(){
@@ -132,8 +83,9 @@ class Floreria {
         }
         return null;
     }
-
 }
+
+ */
 /*
     fun eliminarFloreria( nombreFloreria: String):Unit{
                 //floreriaLista.removeIf{nombreL == nombreFloreria}
@@ -143,7 +95,7 @@ class Floreria {
 */
 
 //}
-// val archivo = File("src/main/kotlin/florer.txt");
+// val archivoFlorerias = File("src/main/kotlin/florer.txt");
 //val archivoOriginal = File("src/main/kotlin/florer.txt").readLines();
 // val floreriasLista = archivoOriginal.map { line ->
 //   val datos = line.split(",")
@@ -152,9 +104,5 @@ class Floreria {
 //val archivoActualizado = floreriasLista.filter {
 //    Floreria.floreriasLista.removeIf{it.nombre == nombreFloreria}
 //}
-// archivo.writeText(archivoActualizado.joinToString("\n"))
+// archivoFlorerias.writeText(archivoActualizado.joinToString("\n"))
 //  listarFlorerias()
-
-
-
-

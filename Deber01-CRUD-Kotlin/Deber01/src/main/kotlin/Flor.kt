@@ -28,5 +28,5 @@ fun crearFlor(): Unit{
     println(flor);
 
     val archivo = File("src/main/kotlin/flor.txt")
-   // write(archivo.toPath(), flor.toString().toByteArray(), StandardOpenOption.APPEND)
+   // write(archivoFlorerias.toPath(), flor.toString().toByteArray(), StandardOpenOption.APPEND)
 }

@@ -1,9 +1,12 @@
 <resources>
-    <string name="app_name">MovilesComp2023A</string>
-    <string name="bienvenida">Bienvenida</string>
-    <string name="mensaje">ENGLISH PORT</string>
-     <string name="mensaje2">ENGLISH PORT</string>
-    <string name="mensaje3">Español LAND</string>
-    <string name="mensaje4">ENGLISH LAND</string>
 
+    <string name="mensaje">Mensaje</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
