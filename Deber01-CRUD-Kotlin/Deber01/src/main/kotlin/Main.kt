@@ -1,5 +1,8 @@
 import java.io.File
+import java.io.IOException
 import java.util.*
+
+
 val archivoFlorerias = File("src/main/kotlin/florer.txt")
 var teclado = Scanner(System.`in`)
 var literal = Scanner(System.`in`);
@@ -25,7 +28,7 @@ fun mostrarMenuGeneral(){
     do {
         println("*REGISTRO DE FLORERIAS*")
         println("1. Registrar floreria");
-        println("2. Listar floreriasLista");
+        println("2. Listar florerias");
         println("3. Eliminar floreria");
         println("4. Salir");
         println("Digite el literal deseado: ");
@@ -33,6 +36,7 @@ fun mostrarMenuGeneral(){
         when (opcion) {
             "1" -> registrarFloreria()
             "2" -> listarFlorerias()
+            "3" -> eliminarFloreria()
             "5" -> instanciarFloreria()
             //"3" -> obtenerFloreriaNombre(teclado.nextLine())//floreria.eliminarFloreria(teclado.nextLine())
             else -> println("nose")
@@ -110,4 +114,24 @@ fun instanciarFloreria(): MutableList<Floreria> {
     return floreriasLista
 }
 
-
+fun eliminarFloreria(){
+    println("Ingrese la floreria a borrar")
+    val textoABorrar = readLine()
+    try {
+        val archivo = File("src/main/kotlin/florer.txt")
+        val lineas: List<String> = archivo.readLines()
+        for (linea in lineas){
+            var florerias = linea.split(",")
+            var nombre = florerias[0]
+            if(textoABorrar == nombre){
+                    //val lineasActualizadas = lineas.filter { it != textoABorrar }
+                    val lineasActualizadas = lineas.filter { !it.contains(nombre) }
+                    archivo.writeText(lineasActualizadas.joinToString("\n"))
+                    println("Objeto borrado del archivo correctamente.")
+                break
+            }
+        }
+    } catch (ex: IOException) {
+        println("Error al borrar el objeto del archivo: ${ex.message}")
+    }
+}
