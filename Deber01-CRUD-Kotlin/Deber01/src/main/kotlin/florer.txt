@@ -1,6 +1,0 @@
-flor2,trdgs,dgs,df,true
-flor3,trdgs,dgs,df,true
-flor6,sdg,sdg,sdg,true
-intento,d,sdg,dsg,true
-intento,d,sdg,dsg,true
-comida,tres,fsd,sdf,true

@@ -1,8 +1,12 @@
 import java.io.File
 import java.io.IOException
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 import java.util.*
 
-val archivoFlorerias = File("src/main/kotlin/florer.txt")
+val archivoFlorerias = File("src/main/kotlin/florerias.txt")
+val archivoFlores = File("src/main/kotlin/flores.txt")
 var teclado = Scanner(System.`in`)
 var literal = Scanner(System.`in`);
 
@@ -23,7 +27,7 @@ fun mostrarMenuGeneral(){
         else -> println("nose")
     }
 }
-    fun mostrarMenuFloreria(){
+fun mostrarMenuFloreria(){
     do {
         println("*REGISTRO DE FLORERIAS*")
         println("1. Registrar floreria");
@@ -45,21 +49,24 @@ fun mostrarMenuGeneral(){
 }
 
 fun mostrarMenuFlor(){
-
-    println("*REGISTRO DE FLORES*");
-    println("1. Registrar flor");
-    println("2. Listar flores");
-    println("3. Eliminar flor");
-    println("4. Eliminar flor");
-    println("Digite el literal deseado: ");
-    var opcion = literal.nextLine()
-    when(opcion){
-        "1" ->
-            crearFlor();
-        else -> println("chao")
-    }
+    do {
+        println("*REGISTRO DE FLORES*");
+        println("1. Registrar flor");
+        println("2. Listar flores");
+        println("3. Eliminar flor");
+        println("4. Eliminar flor");
+        println("5. Salir");
+        println("Digite el literal deseado: ");
+        var opcion = literal.nextLine()
+        when (opcion) {
+            "1" -> registrarFlor();
+            "2" -> listarFlores();
+            else -> println("chao")
+        }
+    }while (opcion!="5")
 }
 
+//CRUD FLORERIA
 fun registrarFloreria(): Unit {
     var floreria = Floreria()
     println("Ingrese el nombre: ");
@@ -151,3 +158,47 @@ fun actualizarFloreria(): Unit{
         println("Error al actualizar el objeto del archivo: ${ex.message}")
     }
 }
+
+//CRUD FLOR
+fun registrarFlor(): Unit {
+    var flor = Flor()
+    println("Ingrese el nombre: " );
+    var nombre: String = teclado.nextLine();
+    println("Ingrese el color: " );
+    var color: String = teclado.nextLine();
+    println("Ingrese si es nativa: " );
+    var esNativa: Boolean = teclado.nextBoolean();
+    teclado.nextLine()
+    //----fecha
+    println("Ingrese la fecha de llegada: " );
+    var fechaString = teclado.nextLine();
+    var formato = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    var fechaLlegada = LocalDate.parse(fechaString, formato)
+    //----
+    println("Ingrese el precio: " );
+    var precio: Double = teclado.nextDouble();
+    flor = Flor(nombre, color, esNativa, fechaLlegada, precio)
+    if (nombre.isNotBlank() && color.isNotBlank()){
+        archivoFlores.appendText( "\n$flor")
+        //archivoFlorerias.appendText("\n"+floreria.toString())
+    }else{
+        println("Datos invalidos!")
+    }
+}
+
+fun listarFlores(): Unit {
+    val flores = archivoFlores.readLines()
+    if (archivoFlores.exists()) {
+        if (flores.size>0){
+            println("**FLORES**")
+            for (flor in flores) {
+                println(flor)
+            }
+        }else{
+            println("No hay flores registradas")
+        }
+    } else {
+        println("No hay lista de flores")
+    }
+}
+
