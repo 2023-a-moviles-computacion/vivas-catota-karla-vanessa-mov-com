@@ -6,7 +6,7 @@ import java.time.LocalDate.parse
 import java.util.*
 
 class Flor{
-    //var idFlor: Int,
+
     var idFloreria: Int
     var idFlor: Int
     var nombre: String

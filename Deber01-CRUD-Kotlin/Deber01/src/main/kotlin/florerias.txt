@@ -1,2 +1,1 @@
-
-2,Lucia flor,jipijapa,0983425454,true
+amelia,roja,false,2022-02-20,22.0
