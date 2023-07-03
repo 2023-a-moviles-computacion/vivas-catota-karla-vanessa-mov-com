@@ -1,3 +1,2 @@
-flor2,trdgs,dgs,df,true
-flor3,trdgs,dgs,df,true
-flor6,sdg,sdg,sdg,true
+
+2,Lucia flor,jipijapa,0983425454,true

@@ -7,6 +7,8 @@ import java.util.*
 
 class Flor{
     //var idFlor: Int,
+    var idFloreria: Int
+    var idFlor: Int
     var nombre: String
     var color: String
     var esNativa: Boolean
@@ -14,6 +16,9 @@ class Flor{
     var precio: Double
 
     constructor() {
+
+        this.idFloreria = 0
+        this.idFlor = 0
         this.nombre = ""
         this.color = ""
         this.esNativa = false
@@ -21,13 +26,18 @@ class Flor{
         this.precio = 0.00
     }
 
-    constructor(nombre: String, color: String, esNativa: Boolean, fechaLlegada: LocalDate, precio: Double) {
+    constructor(idFloreria: Int, idFlor: Int, nombre: String, color: String, esNativa: Boolean, fechaLlegada: LocalDate, precio: Double) {
+
+        this.idFloreria = idFloreria;
+        this.idFlor = idFlor;
         this.nombre = nombre
         this.color = color
         this.esNativa = esNativa
         this.fechaLlegada = fechaLlegada
         this.precio = precio
     }
+
+    var floresLista = mutableListOf<Flor>()
 
     override fun toString(): String {
         return nombre + "," + color +
@@ -37,24 +47,3 @@ class Flor{
     }
 }
 
-
-/*
-fun crearFlor(): Unit{
-    println("Ingrese el nombre: " );
-    var nombre: String = teclado.nextLine();
-    println("Ingrese el color: " );
-    var color: String = teclado.nextLine();
-    println("Ingrese si es nativa: " );
-    var esNativa: Boolean = teclado.nextBoolean();
-    println("Ingrese la fecha de llegada: " );
-    var fechaLlegada: Date = SimpleDateFormat().parse(teclado.nextLine());
-
-    println("Ingrese el precio: ");
-    var precio: Double = teclado.nextDouble();
-    var flor = Flor(nombre, color, esNativa, fechaLlegada, precio)
-    println(flor);
-
-    val archivo = File("src/main/kotlin/flor.txt")
-   // write(archivoFlorerias.toPath(), flor.toString().toByteArray(), StandardOpenOption.APPEND)
-}
- */

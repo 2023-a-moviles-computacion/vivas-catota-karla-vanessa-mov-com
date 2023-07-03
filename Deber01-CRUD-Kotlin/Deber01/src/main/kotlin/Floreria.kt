@@ -4,39 +4,39 @@ import java.io.FileReader
 
 class Floreria {
 
-    //var Floreria: Int,
+    var idFloreria: Int
     var nombre: String
     var direccion: String
-    var horario: String
     var telefono: String
     var haceEnvio: Boolean
+    //var flores: MutableList<Flor> = mutableListOf()
 
     constructor() {
+
+        this.idFloreria = 0
         this.nombre = ""
         this.direccion = ""
-        this.horario = ""
         this.telefono = ""
         this.haceEnvio = false
     }
 
-    constructor(nombre: String, direccion: String, horario: String, telefono: String, haceEnvio: Boolean) {
+    constructor( idFloreria: Int, nombre: String, direccion: String, telefono: String, haceEnvio: Boolean) {
+
+        this.idFloreria = idFloreria;
         this.nombre = nombre;
         this.direccion = direccion;
-        this.horario = horario;
         this.telefono = telefono;
         this.haceEnvio = haceEnvio;
     }
 
     var floreriasLista = mutableListOf<Floreria>()
 
-    init {
-          //floreriasLista = instanciarFloreria()
-    }
-
     override fun toString(): String {
-        return nombre + "," + direccion +
-                "," + horario +
+        return idFloreria.toString() + "," + nombre + "," + direccion +
                 "," + telefono +
                 "," + haceEnvio
+        //+ // "," + flores
     }
+
+    //Perdon Karlita xd, solo queria crear algo en android studio xd
 }

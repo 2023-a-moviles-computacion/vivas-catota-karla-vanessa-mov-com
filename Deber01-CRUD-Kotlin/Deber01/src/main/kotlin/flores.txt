@@ -1,3 +1,0 @@
-
-flor2,roja,true,2022-02-18,12.0
-ROSA,ROJA,true,2022-03-23,23.0

@@ -12,9 +12,7 @@ var literal = Scanner(System.`in`);
 
 fun main(args: Array<String>) {
     mostrarMenuGeneral()
-   // floreria.instanciarFloreria()
 }
-
 fun mostrarMenuGeneral(){
     println("*****SISTEMA DE REGISTRO*****");
     println("1. Registro de Florerias");
@@ -24,7 +22,7 @@ fun mostrarMenuGeneral(){
     when(opcion){
         "1" -> mostrarMenuFloreria();
         "2" -> mostrarMenuFlor();
-        else -> println("nose")
+        else -> println("Opcion incorrecta!")
     }
 }
 fun mostrarMenuFloreria(){
@@ -42,52 +40,55 @@ fun mostrarMenuFloreria(){
             "2" -> listarFlorerias()
             "3" -> eliminarFloreria()
             "4" -> actualizarFloreria()
-            //"3" -> obtenerFloreriaNombre(teclado.nextLine())//floreria.eliminarFloreria(teclado.nextLine())
-            else -> println("nose")
+            else -> println("Opcion incorrecta!")
         }
     } while(opcion!="5")
 }
-
 fun mostrarMenuFlor(){
     do {
         println("*REGISTRO DE FLORES*");
         println("1. Registrar flor");
         println("2. Listar flores");
-        println("3. Eliminar flor");
-        println("4. Eliminar flor");
+       // println("3. Eliminar flor");
+       // println("4. Actualizar flor");
         println("5. Salir");
         println("Digite el literal deseado: ");
         var opcion = literal.nextLine()
         when (opcion) {
             "1" -> registrarFlor();
             "2" -> listarFlores();
-            else -> println("chao")
+            else -> println("Opcion incorrecta!")
         }
     }while (opcion!="5")
 }
-
-//CRUD FLORERIA
-fun registrarFloreria(): Unit {
-    var floreria = Floreria()
-    println("Ingrese el nombre: ");
+fun pedirDatosFloreria(): Floreria{
+    println("Ingrese el id de la floreria: ");
+    var idFloreria: Int = teclado.nextInt();
+    teclado.nextLine();
+    println("Ingrese el nombre de la floreria: ");
     var nombre: String = teclado.nextLine();
-    println("Ingrese el direccion: ");
+    println("Ingrese la direccion de la floreria: ");
     var direccion: String = teclado.nextLine();
-    println("Ingrese el horario: ");
-    var horario: String = teclado.nextLine();
-    println("Ingrese el telefono: ");
+    println("Ingrese el telefono de la floreria: ");
     var telefono: String = teclado.nextLine();
     println("Ingrese si hace envio (1: Si, 0: No)");
     var haceEnvio: Boolean = teclado.nextBoolean();
-     floreria = Floreria(nombre, direccion, horario, telefono, haceEnvio)
-    if (nombre.isNotBlank() && direccion.isNotBlank() && horario.isNotBlank() && telefono.isNotBlank()){
+    var floreria = Floreria(idFloreria,nombre, direccion, telefono, haceEnvio)
+    return floreria
+}
+//CRUD FLORERIA
+fun registrarFloreria(): Unit {
+    var floreria = Floreria()
+    floreria = pedirDatosFloreria()
+    if (floreria.nombre.isNotBlank() && floreria.direccion.isNotBlank()
+         && floreria.telefono.isNotBlank()){
         archivoFlorerias.appendText( "\n$floreria")
+        println("Floreria registrada")
         //archivoFlorerias.appendText("\n"+floreria.toString())
     }else{
         println("Datos invalidos!")
     }
 }
-
 fun listarFlorerias(): Unit {
     val florerias = archivoFlorerias.readLines()
     if (archivoFlorerias.exists()) {
@@ -99,7 +100,6 @@ fun listarFlorerias(): Unit {
         println("No hay florerias registradas")
     }
 }
-
 fun eliminarFloreria(): Unit{
     println("Ingrese el nombre de la floreria a borrar")
     val floreriaABorrar = readLine()
@@ -120,8 +120,8 @@ fun eliminarFloreria(): Unit{
         println("Error al borrar el objeto del archivo: ${ex.message}")
     }
 }
-
 fun actualizarFloreria(): Unit{
+    var objetoEncontrado:Boolean = false
     println("Ingrese el nombre de la floreria a actualizar")
     val floreriaAActualizar = readLine()
     try {
@@ -133,41 +133,36 @@ fun actualizarFloreria(): Unit{
                 //val lineasActualizadas = lineas.filter { it != textoABorrar }
                 val lineaPorActualizar = lineas.filter { it.contains(nombre) }
                 var numeroLinea = lineas.indexOf(linea)
-                println("DATOS:");
-                println("Ingrese el nombre: ");
-                var nombre: String = teclado.nextLine();
-                println("Ingrese el direccion: ");
-                var direccion: String = teclado.nextLine();
-                println("Ingrese el horario: ");
-                var horario: String = teclado.nextLine();
-                println("Ingrese el telefono: ");
-                var telefono: String = teclado.nextLine();
-                println("Ingrese si hace envio (1: Si, 0: No)");
-                var haceEnvio: Boolean = teclado.nextBoolean();
-
-                var infoNueva = Floreria(nombre, direccion, horario, telefono, haceEnvio)
+                //pedir los datos para actualizarlos
+                var infoNueva = pedirDatosFloreria()
                 lineas[numeroLinea]= infoNueva.toString()
                 archivoFlorerias.writeText(lineas.joinToString("\n"))
                 println("Objeto actualizado del archivo correctamente.")
+                objetoEncontrado = true
                 break
-            }else{
-                println("Floreria no encontrada")
             }
+        }
+        if (!objetoEncontrado){
+            println("Floreria no encontrada")
         }
     } catch (ex: IOException) {
         println("Error al actualizar el objeto del archivo: ${ex.message}")
     }
 }
-
 //CRUD FLOR
-fun registrarFlor(): Unit {
-    var flor = Flor()
-    println("Ingrese el nombre: " );
+
+fun pedirDatosFlor(): Flor{
+    println("Ingrese el id de la floreria a la que pertenece la flor: " );
+    var idFloreria: Int = teclado.nextInt();
+    teclado.nextLine();
+    println("Ingrese el id de la flor: " );
+    var idFlor: Int = teclado.nextInt();
+    println("Ingrese el nombre de la flor: " );
     var nombre: String = teclado.nextLine();
-    println("Ingrese el color: " );
+    println("Ingrese el color de la flor: " );
     var color: String = teclado.nextLine();
-    println("Ingrese si es nativa: " );
-    var esNativa: Boolean = teclado.nextBoolean();
+    println("Es nativa (1: Si, 2: No): " );
+    var esNativa: String = teclado.nextLine();
     teclado.nextLine()
     //----fecha
     println("Ingrese la fecha de llegada: " );
@@ -177,15 +172,27 @@ fun registrarFlor(): Unit {
     //----
     println("Ingrese el precio: " );
     var precio: Double = teclado.nextDouble();
-    flor = Flor(nombre, color, esNativa, fechaLlegada, precio)
-    if (nombre.isNotBlank() && color.isNotBlank()){
+    var flor = Flor(idFloreria, idFlor, nombre, color, esNativa.toBoolean(), fechaLlegada, precio)
+    return flor
+}
+
+fun transformarBoolean(esNativa: String): Boolean{
+    if (esNativa == "1"){
+        return true
+    }else{
+        return false
+    }
+}
+fun registrarFlor(): Unit {
+    var flor = pedirDatosFlor()
+    if (flor.nombre.isNotBlank() && flor.color.isNotBlank()){
         archivoFlores.appendText( "\n$flor")
+        println("Flor registrada")
         //archivoFlorerias.appendText("\n"+floreria.toString())
     }else{
         println("Datos invalidos!")
     }
 }
-
 fun listarFlores(): Unit {
     val flores = archivoFlores.readLines()
     if (archivoFlores.exists()) {
@@ -201,4 +208,3 @@ fun listarFlores(): Unit {
         println("No hay lista de flores")
     }
 }
-
