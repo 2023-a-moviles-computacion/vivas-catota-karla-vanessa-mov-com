@@ -40,7 +40,8 @@ class Flor{
     var floresLista = mutableListOf<Flor>()
 
     override fun toString(): String {
-        return nombre + "," + color +
+        return "" + idFloreria + "," + idFlor + "," +
+        nombre + "," + color +
                 "," + esNativa +
                 "," + fechaLlegada +
                 "," + precio

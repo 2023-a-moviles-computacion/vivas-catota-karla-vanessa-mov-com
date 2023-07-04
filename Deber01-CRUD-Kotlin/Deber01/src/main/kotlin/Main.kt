@@ -117,7 +117,7 @@ fun eliminarFloreria(): Unit{
     val idFloreriaBorrar = readLine()
     val lineas = archivoFlorerias.readLines().toMutableList()
     for (linea in lineas) {
-        var info = linea.split(",")
+        var info = linea.split(";")
         var idFloreriaArchivo = info[0]
         if (idFloreriaBorrar == idFloreriaArchivo){
             var numeroLinea = lineas.indexOf(linea)
@@ -135,7 +135,7 @@ fun actualizarFloreria(): Unit{
     try {
         val lineas = archivoFlorerias.readLines().toMutableList()
         for (linea in lineas){
-            var info = linea.split(",")
+            var info = linea.split(";")
             var idFloreriaArchivo = info[0]
             if(floreriaAActualizar == idFloreriaArchivo){
                 //obtengo la linea donde esta la floreria
@@ -182,7 +182,7 @@ fun pedirDatosFlor(): Flor{
     return flor
 }
 fun transformarBoolean(condicion: String): Boolean{
-    if (condicion == "S"){
+    if (condicion == "S" || condicion == "s"){
         return true
     }else{
         return false
@@ -219,8 +219,8 @@ fun eliminarFlor(): Unit{
     val idFlorBorrar = readLine()
     val lineas = archivoFlorerias.readLines().toMutableList()
     for (linea in lineas) {
-        var info = linea.split(",")
-        var idFlorArchivo = info[0]
+        var info = linea.split(";")
+        var idFlorArchivo = info[1]
         if (idFlorBorrar == idFlorArchivo){
             var numeroLinea = lineas.indexOf(linea)
             lineas.remove(linea)
@@ -237,8 +237,8 @@ fun actualizarFlor(): Unit{
     try {
         val lineas = archivoFlores.readLines().toMutableList()
         for (linea in lineas){
-            var info = linea.split(",")
-            var idFlorArchivo = info[0]
+            var info = linea.split(";")
+            var idFlorArchivo = info[1]
             if(florAActualizar == idFlorArchivo){
                 //obtengo la linea donde esta la flor
                 var numeroLinea = lineas.indexOf(linea)
@@ -264,7 +264,7 @@ fun mostrarFloresFloreria(): Unit{
     val idFloreria = readLine()
     val lineas = archivoFlorerias.readLines().toMutableList()
     for (linea in lineas) {
-        var info = linea.split(",")
+        var info = linea.split(";")
         var idFloreriaArchivo = info[0]
         if (idFloreria == idFloreriaArchivo){
             for (item in lineas){

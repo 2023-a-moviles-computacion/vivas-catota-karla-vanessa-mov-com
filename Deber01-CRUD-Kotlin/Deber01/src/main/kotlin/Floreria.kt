@@ -32,10 +32,9 @@ class Floreria {
     var floreriasLista = mutableListOf<Floreria>()
 
     override fun toString(): String {
-        return idFloreria.toString() + "," + nombre + "," + direccion +
+        return "" + idFloreria + "," + nombre + "," + direccion +
                 "," + telefono +
                 "," + haceEnvio
-        //+ // "," + flores
     }
 
     //Perdon Karlita xd, solo queria crear algo en android studio xd
