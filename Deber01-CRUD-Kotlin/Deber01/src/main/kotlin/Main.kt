@@ -2,8 +2,8 @@ import java.io.File
 import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeParseException
 import java.util.*
+import kotlin.system.exitProcess
 
 val archivoFlorerias = File("src/main/kotlin/florerias.txt")
 val archivoFlores = File("src/main/kotlin/flores.txt")
@@ -13,53 +13,59 @@ var literal = Scanner(System.`in`);
 fun main(args: Array<String>) {
     mostrarMenuPrincipal()
 }
+//-------------------------------------------------------------
+//MENUS
 fun mostrarMenuPrincipal(){
-    println("*****MENU DEL SISTEMA DE REGISTRO*****");
-    println("1. Menú de Florerias");
-    println("2. Menú de Flores");
-    println("3. Salir");
-    println("Digite el literal deseado: ");
+    do{
+    println("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀")
+    println("-------MENU DEL SISTEMA CRUD-------");
+    println("\t1. Menú de Florerias");
+    println("\t2. Menú de Flores");
+    println("\t3. Salir");
+    print("Digite el literal deseado: ");
     var opcion = literal.nextLine()
-    when(opcion){
-        "1" -> mostrarMenuFloreria();
-        "2" -> mostrarMenuFlor();
-        else -> println("Ha salido!")
-    }
+        when(opcion){
+            "1" -> mostrarMenuFloreria();
+            "2" -> mostrarMenuFlor();
+            "3" -> exitProcess(0)
+            else -> println("Opción desconocida!")
+        }
+    }    while(opcion.toInt()!=3)
 }
 fun mostrarMenuFloreria(){
     do {
-        println("*REGISTRO DE FLORERIAS*")
-        println("1. Registrar floreria");
-        println("2. Listar florerias");
-        println("3. Eliminar floreria");
-        println("4. Actualizar floreria");
-        println("5. Flores por floreria");
-        println("6. Volver al menú principal");
-        println("7. Salir");
-        println("Digite el literal deseado: ");
+        println("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀")
+        println("*MENÚ DE FLORERIAS*")
+        println("\t1. Registrar floreria");
+        println("\t2. Listar florerias");
+        println("\t3. Eliminar floreria");
+        println("\t4. Actualizar floreria");
+        println("\t5. Volver al menú principal");
+        println("\t6. Salir");
+        print("Digite el literal deseado: ");
         var opcion = literal.nextLine()
         when (opcion) {
             "1" -> registrarFloreria()
             "2" -> listarFlorerias()
             "3" -> eliminarFloreria()
             "4" -> actualizarFloreria()
-            "4" -> mostrarFloresFloreria()
-            "6" -> mostrarMenuPrincipal()
-            "7" -> break
+            "5" -> mostrarMenuPrincipal()
+            "6" -> exitProcess(0)
             else -> println("Opción desconocida!")
         }
-    } while(opcion.toInt()!=7)
+    } while(opcion.toInt()!=6)
 }
 fun mostrarMenuFlor(){
     do {
-        println("*REGISTRO DE FLORES*");
-        println("1. Registrar flor");
-        println("2. Listar flores");
-        println("3. Eliminar flor");
-        println("4. Actualizar flor");
-        println("5. Volver al menú principal");
-        println("6. Salir");
-        println("Digite el literal deseado: ");
+        println("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀")
+        println("*MENÚ DE FLORES*");
+        println("\t1. Registrar flor");
+        println("\t2. Listar flores");
+        println("\t3. Eliminar flor");
+        println("\t4. Actualizar flor");
+        println("\t5. Volver al menú principal");
+        println("\t6. Salir");
+        print("Digite el literal deseado: ");
         var opcion = literal.nextLine()
         when (opcion) {
             "1" -> registrarFlor();
@@ -67,70 +73,81 @@ fun mostrarMenuFlor(){
             "3" -> eliminarFlor()
             "4" -> actualizarFlor()
             "5" -> mostrarMenuPrincipal()
-            "6" -> break
+            "6" -> exitProcess(0)
             else -> println("Opción desconocida!")
         }
     }while (opcion.toInt()!=6)
 }
+//-------------------------------------------------------------
+//------------------------CRUD FLORERIA
 fun pedirDatosFloreria(): Floreria{
     println("Ingrese el id de la floreria: ");
     var idFloreria: Int = teclado.nextInt();
     teclado.nextLine();
     println("Ingrese el nombre de la floreria: ");
     var nombre: String = teclado.nextLine();
-    println("Ingrese la direccion de la floreria: ");
-    var direccion: String = teclado.nextLine();
-    println("Ingrese el telefono de la floreria: ");
+    println("Ingrese la ubicación de la floreria: ");
+    var ubicacion: String = teclado.nextLine();
+    println("Ingrese el teléfono de la floreria: ");
     var telefono: String = teclado.nextLine();
     println("Ingrese si hace envio (S: Si, Cualquier tecla: No):");
     var haceEnvio: String = teclado.nextLine();
-    var floreria = Floreria(idFloreria,nombre, direccion, telefono, transformarBoolean(haceEnvio))
+    var floreria = Floreria(idFloreria,nombre, ubicacion, telefono, transformarBoolean(haceEnvio))
     return floreria
 }
-//CRUD FLORERIA
+
 fun registrarFloreria(): Unit {
     var floreria = Floreria()
     floreria = pedirDatosFloreria()
-    if (floreria.nombre.isNotBlank() && floreria.direccion.isNotBlank()
+    if (floreria.nombre.isNotBlank() && floreria.ubicacion.isNotBlank()
          && floreria.telefono.isNotBlank()){
         val florerias = archivoFlorerias.readLines().toMutableList()
         florerias.add(floreria.toString())
         archivoFlorerias.writeText(florerias.joinToString("\n"))
         println("Floreria registrada")
     }else{
-        println("Datos invalidos!")
+        println("Datos inválidos!")
     }
 }
 fun listarFlorerias(): Unit {
     val florerias = archivoFlorerias.readLines()
     if (archivoFlorerias.exists()) {
-        println("**FLORERIAS**")
-        for (floreria in florerias) {
-            println(floreria)
+        if (florerias.isNotEmpty()){
+            println("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀")
+            println("****          FLORERIAS        ****")
+            for (floreria in florerias) {
+                println("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀")
+                var detalle = floreria.split(";")
+                println("\tId de la florería: " + detalle[0] + "\n\tNombre: " + detalle[1] + "\n\tUbicación: " + detalle[2]
+                + "\n\tTeléfono: " + detalle[3] + "\n\tHace envio?: " + detalle[4])
+            }
+        } else {
+            println("No hay florerias registradas")
         }
-    } else {
-        println("No hay florerias registradas")
+    }else {
+        println("No existe el archivo de florerias")
     }
 }
 fun eliminarFloreria(): Unit{
-    println("Ingrese el id de la floreria a borrar")
+    print("Ingrese el id de la floreria a eliminar-> ")
     val idFloreriaBorrar = readLine()
     val lineas = archivoFlorerias.readLines().toMutableList()
     for (linea in lineas) {
         var info = linea.split(";")
         var idFloreriaArchivo = info[0]
         if (idFloreriaBorrar == idFloreriaArchivo){
-            var numeroLinea = lineas.indexOf(linea)
             lineas.remove(linea)
             archivoFlorerias.writeText(lineas.joinToString("\n"))
-            println("Floreria eliminada del archivo correctamente.")
+            println("Florería eliminada del archivo correctamente.")
             break
+        }else{
+            println("La florería no se ha encontrado")
         }
     }
 }
 fun actualizarFloreria(): Unit{
     var objetoEncontrado:Boolean = false
-    println("Ingrese el id de la floreria a actualizar")
+    print("Ingrese el id de la floreria a actualizar-> ")
     val floreriaAActualizar = readLine()
     try {
         val lineas = archivoFlorerias.readLines().toMutableList()
@@ -144,19 +161,20 @@ fun actualizarFloreria(): Unit{
                 var infoNueva = pedirDatosFloreria()
                 lineas[numeroLinea]= infoNueva.toString()
                 archivoFlorerias.writeText(lineas.joinToString("\n"))
-                println("Objeto actualizado del archivo correctamente.")
+                println("Florería actualizado del archivo correctamente.")
                 objetoEncontrado = true
                 break
             }
         }
         if (!objetoEncontrado){
-            println("Floreria no encontrada")
+            println("Florería no encontrada")
         }
     } catch (ex: IOException) {
-        println("Error al actualizar el objeto del archivo: ${ex.message}")
+        println("Error al actualizar la florería del archivo: ${ex.message}")
     }
 }
-//CRUD FLOR
+//------------------------------------------------------------
+//----------------------CRUD FLOR
 fun pedirDatosFlor(): Flor{
     println("Ingrese el id de la floreria a la que pertenece la flor: " );
     var idFloreria: Int = teclado.nextInt();
@@ -176,18 +194,12 @@ fun pedirDatosFlor(): Flor{
     var formato = DateTimeFormatter.ofPattern("dd/MM/yyyy")
     var fechaLlegada = LocalDate.parse(fechaString, formato)
     //----
-    println("Ingrese el precio: " );
+    println("Ingrese el precio por unidad: " );
     var precio: Double = teclado.nextDouble();
     var flor = Flor(idFloreria, idFlor, nombre, color, transformarBoolean(esNativa), fechaLlegada, precio)
     return flor
 }
-fun transformarBoolean(condicion: String): Boolean{
-    if (condicion == "S" || condicion == "s"){
-        return true
-    }else{
-        return false
-    }
-}
+
 fun registrarFlor(): Unit {
     var flor = pedirDatosFlor()
     if (flor.nombre.isNotBlank() && flor.color.isNotBlank()){
@@ -196,43 +208,50 @@ fun registrarFlor(): Unit {
         archivoFlores.writeText(flores.joinToString("\n"))
         println("Flor registrada")
     }else{
-        println("Datos invalidos!")
+        println("Datos inválidos!")
     }
 }
 fun listarFlores(): Unit {
     val flores = archivoFlores.readLines()
     if (archivoFlores.exists()) {
-        if (flores.size>0){
-            println("**FLORES**")
+        if (flores.isNotEmpty()){
+            println("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀")
+            println("****           FLORES          ****")
             for (flor in flores) {
-                println(flor)
+                println("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀")
+                var detalle = flor.split(";")
+                println("\tId de la floreria: " + detalle[0] + "\n\tId de la flor: " + detalle[1]
+                        + "\n\tNombre: " + detalle[2] + "\n\tColor: " + detalle[3]
+                        + "\n\tEs nativa?: " + detalle[4] + "\n\tFecha de llegada: " + detalle[5]
+                        + "\n\tPrecio por unidad: " + detalle[6])
             }
         }else{
             println("No hay flores registradas")
         }
     } else {
-        println("No hay lista de flores")
+        println("No existe el archivo de flores")
     }
 }
 fun eliminarFlor(): Unit{
-    println("Ingrese el id de la flor a borrar")
+    print("Ingrese el id de la flor a eliminar-> ")
     val idFlorBorrar = readLine()
-    val lineas = archivoFlorerias.readLines().toMutableList()
+    val lineas = archivoFlores.readLines().toMutableList()
     for (linea in lineas) {
         var info = linea.split(";")
         var idFlorArchivo = info[1]
         if (idFlorBorrar == idFlorArchivo){
-            var numeroLinea = lineas.indexOf(linea)
             lineas.remove(linea)
-            archivoFlorerias.writeText(lineas.joinToString("\n"))
-            println("Floreria eliminada del archivo correctamente.")
+            archivoFlores.writeText(lineas.joinToString("\n"))
+            println("Flor eliminada del archivo correctamente.")
             break
+        }else{
+            println("La flor no se ha encontrado")
         }
     }
 }
 fun actualizarFlor(): Unit{
     var objetoEncontrado:Boolean = false
-    println("Ingrese el id de la flor a actualizar")
+    print("Ingrese el id de la flor a actualizar-> ")
     val florAActualizar = readLine()
     try {
         val lineas = archivoFlores.readLines().toMutableList()
@@ -255,21 +274,14 @@ fun actualizarFlor(): Unit{
             println("Flor no encontrada")
         }
     } catch (ex: IOException) {
-        println("Error al actualizar el objeto del archivo: ${ex.message}")
+        println("Error al actualizar la flor del archivo: ${ex.message}")
     }
 }
 
-fun mostrarFloresFloreria(): Unit{
-    println("Ingrese el id de la floreria")
-    val idFloreria = readLine()
-    val lineas = archivoFlorerias.readLines().toMutableList()
-    for (linea in lineas) {
-        var info = linea.split(";")
-        var idFloreriaArchivo = info[0]
-        if (idFloreria == idFloreriaArchivo){
-            for (item in lineas){
-                println(item)
-            }
-        }
+fun transformarBoolean(condicion: String): Boolean{
+    if (condicion == "S" || condicion == "s"){
+        return true
+    }else{
+        return false
     }
 }
