@@ -4,13 +4,13 @@ import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.ListView
+import android.view.ContextMenu
+import android.widget.*
 
 class CrearFloreria : AppCompatActivity() {
+
+    private var onDataChangedCallback: (() -> Unit)? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crear_floreria)
@@ -22,14 +22,53 @@ class CrearFloreria : AppCompatActivity() {
                 val ubicacion = findViewById<EditText>(R.id.input_ubicacion)
                 val telefono = findViewById<EditText>(R.id.input_telefono)
                 val haceEnvio = findViewById<CheckBox>(R.id.cb_hace_envio)
-                BaseDeDatos.tablaFloreria!!.crearFloreria(
+                if (nombre.text.toString().isNotEmpty() && ubicacion.text.toString().isNotEmpty()
+                    && telefono.text.toString().isNotEmpty()){
+                    BaseDeDatos.tablaFloreria!!.crearFloreria(
+                        nombre.text.toString(),
+                        ubicacion.text.toString(),
+                        telefono.text.toString(),
+                        haceEnvio.isChecked.toString()
+                    )
+                    nombre.setText("")
+                    ubicacion.setText("")
+                    telefono.setText("")
+                    haceEnvio.isChecked=false
+
+                    onDataChangedCallback?.invoke()
+                    irActividad(ListaFlorerias::class.java)
+                }else{
+                    val aviso = Toast.makeText(this, "Debe llenar los campos!", Toast.LENGTH_LONG)
+                    aviso.show()
+
+                }
+
+
+            }
+
+/*
+        val botonActualizarBDD = findViewById<Button>(idItemSeleccionado)
+        botonActualizarBDD
+            .setOnClickListener {
+                val id = findViewById<EditText>(R.id.input_id)
+                val nombre = findViewById<EditText>(R.id.input_nombre_floreria)
+                val ubicacion = findViewById<EditText>(R.id.input_ubicacion)
+                val telefono = findViewById<EditText>(R.id.input_telefono)
+                val haceEnvio = findViewById<CheckBox>(R.id.cb_hace_envio)
+                BaseDeDatos.tablaFloreria!!.actualizarFloreria(
+                    id.text.toString().toInt(),
                     nombre.text.toString(),
                     ubicacion.text.toString(),
                     telefono.text.toString(),
                     haceEnvio.isChecked.toString()
+
                 )
-                irActividad(ListaFlorerias::class.java)
             }
+
+ */
+
+
+
 
     }
 
@@ -38,5 +77,8 @@ class CrearFloreria : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun setOnDataChangedCallback(callback: () -> Unit) {
+        onDataChangedCallback = callback
+    }
 
 }

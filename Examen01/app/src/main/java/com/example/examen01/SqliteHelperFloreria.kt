@@ -72,7 +72,83 @@ class SqliteHelperFloreria(
         return arreglo
     }
 
+    fun eliminarFloreriaFormulario(id:Int):Boolean{
+        val conexionEscritura = writableDatabase
+        // where ID = ?
+        val parametrosConsultaDelete = arrayOf( id.toString() )
+        val resultadoEliminacion = conexionEscritura
+            .delete(
+                "FLORERIA", // Nombre tabla
+                "id=?", // Consulta Where
+                parametrosConsultaDelete
+            )
+        conexionEscritura.close()
+        return if(resultadoEliminacion.toInt() == -1) false else true
+    }
 
+    fun actualizarFloreria(
+        id:Int,
+        nombre: String,
+        ubicacion: String,
+        telefono: String,
+        haceEnvio: String
+    ):Boolean{
+        val conexionEscritura = writableDatabase
+        val valoresAActualizar = ContentValues()
+        valoresAActualizar.put("nombre", nombre)
+        valoresAActualizar.put("ubicacion", ubicacion)
+        valoresAActualizar.put("telefono", telefono)
+        valoresAActualizar.put("haceEnvio", haceEnvio)
+        // where ID = ?
+        val parametrosConsultaActualizar = arrayOf( id.toString() )
+        val resultadoActualizacion = conexionEscritura
+            .update(
+                "FLORERIA", // Nombre tabla
+                valoresAActualizar, // Valores
+                "id=?", // Consulta Where
+                parametrosConsultaActualizar
+            )
+        conexionEscritura.close()
+        return if(resultadoActualizacion.toInt() == -1) false else true
+    }
+/*
+    fun consultarFloreriaPorID(id: Int): Floreria{
+        val baseDatosLectura = readableDatabase
+        val scriptConsultaLectura = """
+            SELECT * FROM FLORERIA WHERE ID = ?
+        """.trimIndent()
+        val parametrosConsultaLectura = arrayOf(id.toString())
+        val resultadoConsultaLectura = baseDatosLectura.rawQuery(
+            scriptConsultaLectura, // Consulta
+            parametrosConsultaLectura, // Parametros
+        )
+
+        // logica busqueda
+        val existeUsuario = resultadoConsultaLectura.moveToFirst()
+        val usuarioEncontrado = Floreria(0, "" , "", "",false)
+        val arreglo = arrayListOf<Floreria>()
+        if(existeUsuario){
+            do{
+                val id= resultadoConsultaLectura.getInt(0) // Indice 0
+                val nombre = resultadoConsultaLectura.getString(1)
+                val ubicacion = resultadoConsultaLectura.getString(2)
+                val telefono = resultadoConsultaLectura.getString(3)
+                val haceEnvio = resultadoConsultaLectura.getString(4)
+                if(id != null){
+                    // llenar el arreglo con un nuevo BEntrenador
+                    usuarioEncontrado.id = id
+                    usuarioEncontrado.nombre = nombre
+                    usuarioEncontrado.ubicacion = ubicacion
+                    usuarioEncontrado.telefono = telefono
+                    usuarioEncontrado.haceEnvio = haceEnvio.toBoolean()
+                }
+            } while (resultadoConsultaLectura.moveToNext())
+        }
+        resultadoConsultaLectura.close()
+        baseDatosLectura.close()
+        return usuarioEncontrado
+    }
+*/
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         TODO("Not yet implemented")
