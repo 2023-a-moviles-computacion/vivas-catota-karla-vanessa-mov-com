@@ -7,7 +7,7 @@
     tools:context=".CrearFloreria">
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/input_nombre_floreria"
         android:layout_width="334dp"
         android:layout_height="53dp"
         android:layout_marginTop="112dp"
@@ -20,30 +20,30 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/input_ubicacion"
         android:layout_width="336dp"
         android:layout_height="66dp"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Ubicación"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/input_nombre_floreria"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintStart_toStartOf="@+id/input_nombre_floreria"
+        app:layout_constraintTop_toBottomOf="@+id/input_nombre_floreria" />
 
     <EditText
-        android:id="@+id/editTextPhone"
+        android:id="@+id/input_telefono"
         android:layout_width="336dp"
         android:layout_height="65dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Teléfono"
         android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
+        app:layout_constraintEnd_toEndOf="@+id/input_ubicacion"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintStart_toStartOf="@+id/input_ubicacion"
+        app:layout_constraintTop_toBottomOf="@+id/input_ubicacion" />
 
     <Button
         android:id="@+id/btn_guardar_floreria"
@@ -51,9 +51,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
         android:text="Guardar"
-        app:layout_constraintEnd_toEndOf="@+id/editTextPhone"
+        app:layout_constraintEnd_toEndOf="@+id/input_telefono"
         app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="@+id/editTextPhone"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+        app:layout_constraintStart_toStartOf="@+id/input_telefono"
+        app:layout_constraintTop_toBottomOf="@+id/input_telefono" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

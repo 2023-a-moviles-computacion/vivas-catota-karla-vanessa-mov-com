@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
+        android:id="@+id/lv_florerias"
         android:layout_width="315dp"
         android:layout_height="516dp"
         android:layout_marginBottom="56dp"
