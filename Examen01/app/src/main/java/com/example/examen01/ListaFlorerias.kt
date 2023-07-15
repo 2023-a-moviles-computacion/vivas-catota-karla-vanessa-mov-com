@@ -14,8 +14,11 @@ var idItemSeleccionado = 0
 private lateinit var adaptador: ArrayAdapter<Floreria>
 
 class ListaFlorerias : AppCompatActivity() {
-
-
+/*
+    companion object{
+        var idItemSeleccionado = 0
+    }
+*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_florerias)
@@ -42,25 +45,6 @@ class ListaFlorerias : AppCompatActivity() {
 
         registerForContextMenu(listViewFlorerias)
 
-
-        /*val botonActualizarBDD = findViewById<Button>(R.id.mi_editar)
-        botonActualizarBDD
-            .setOnClickListener {
-                //val id = findViewById<EditText>(R.id.input_id)
-                val nombre = findViewById<EditText>(R.id.input_nombre_floreria)
-                val ubicacion = findViewById<EditText>(R.id.input_ubicacion)
-                val telefono = findViewById<EditText>(R.id.input_telefono)
-                val haceEnvio = findViewById<CheckBox>(R.id.cb_hace_envio)
-                BaseDeDatos.tablaFloreria!!.actualizarFloreria(
-                 //   id.text.toString().toInt(),
-                    nombre.text.toString(),
-                    ubicacion.text.toString(),
-                    telefono.text.toString(),
-                    haceEnvio.isChecked.toString()
-                )
-            }
-
-         */
     }
 
     override fun onCreateContextMenu(
@@ -82,7 +66,16 @@ class ListaFlorerias : AppCompatActivity() {
         return when (item.itemId){
             R.id.mi_editar ->{
                 "${idItemSeleccionado}"
-                //irActividad(CrearFloreria::class.java)
+                val nombre = intent.getStringExtra("nombre")
+                val ubicacion = intent.getStringExtra("ubicacion")
+                val telefono = intent.getStringExtra("telefono")
+                val haceEnvio = intent.getStringExtra("haceEnvio")
+                BaseDeDatos.tablaFloreria!!.actualizarFloreria(
+                    idItemSeleccionado, nombre.toString(),
+                ubicacion.toString(), telefono.toString(), haceEnvio.toString())
+                obtenerFlorerias()
+                adaptador.notifyDataSetChanged()
+                irActividad(ListaFlorerias::class.java)
                 return true
             }
             R.id.mi_eliminar ->{

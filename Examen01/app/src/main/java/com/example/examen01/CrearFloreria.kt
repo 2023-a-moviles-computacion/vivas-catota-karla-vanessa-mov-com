@@ -46,30 +46,6 @@ class CrearFloreria : AppCompatActivity() {
 
             }
 
-/*
-        val botonActualizarBDD = findViewById<Button>(idItemSeleccionado)
-        botonActualizarBDD
-            .setOnClickListener {
-                val id = findViewById<EditText>(R.id.input_id)
-                val nombre = findViewById<EditText>(R.id.input_nombre_floreria)
-                val ubicacion = findViewById<EditText>(R.id.input_ubicacion)
-                val telefono = findViewById<EditText>(R.id.input_telefono)
-                val haceEnvio = findViewById<CheckBox>(R.id.cb_hace_envio)
-                BaseDeDatos.tablaFloreria!!.actualizarFloreria(
-                    id.text.toString().toInt(),
-                    nombre.text.toString(),
-                    ubicacion.text.toString(),
-                    telefono.text.toString(),
-                    haceEnvio.isChecked.toString()
-
-                )
-            }
-
- */
-
-
-
-
     }
 
     fun irActividad(clase: Class<*>){
