@@ -7,6 +7,6 @@ class Floreria (
     var telefono: String?
 ){
     override fun toString(): String {
-        return "${nombre}-${ubicacion}-${telefono}"
+        return  "ID: ${id}\nNombre: ${nombre}\nUbicacion: ${ubicacion}\nTelefono: ${telefono}"
     }
 }

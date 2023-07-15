@@ -9,6 +9,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        BaseDeDatos.tablaFloreria = SqliteHelperFloreria(this)
 
         val botonListaFlorerias = findViewById<Button>(R.id.btn_lista_florerias)
         botonListaFlorerias.setOnClickListener {

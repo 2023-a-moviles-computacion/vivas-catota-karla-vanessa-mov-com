@@ -17,9 +17,24 @@ class ListaFlorerias : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_florerias)
 
-        val db = SqliteHelperFloreria(this)
-        val florerias = db.listaFlorerias()
 
+        val florerias = BaseDeDatos.tablaFloreria!!.listaFlorerias()
+/*
+        val florerias= arrayListOf<Floreria>()
+
+            florerias
+                .add(
+                    Floreria(1, "Karla", "a@a.com", "3333")
+                )
+        florerias
+                .add(
+                    Floreria(2,"Vanessa", "b@b.com", "333332")
+                )
+        florerias
+                .add(
+                    Floreria(3, "Lucy", "c@c.com", "3333342")
+                )
+*/
 
         val listViewFlorerias = findViewById<ListView>(R.id.lv_florerias)
         val adaptador = ArrayAdapter(
