@@ -19,7 +19,8 @@ class SqliteHelperFloreria(
                id INTEGER PRIMARY KEY AUTOINCREMENT,
                nombre VARCHAR(50),
                ubicacion VARCHAR(50),
-               telefono VARCHAR(50)
+               telefono VARCHAR(50),
+               haceEnvio VARCHAR(50)
                ) 
             """.trimIndent()
         db?.execSQL(scriptSQLCrearTablaFloreria)
@@ -29,12 +30,14 @@ class SqliteHelperFloreria(
         nombre: String,
         ubicacion: String,
         telefono: String,
+        haceEnvio: String
     ): Boolean {
         val basedatosEscritura = writableDatabase
         val valoresAGuardar = ContentValues()
         valoresAGuardar.put("nombre", nombre)
         valoresAGuardar.put("ubicacion", ubicacion)
         valoresAGuardar.put("telefono", telefono)
+        valoresAGuardar.put("haceEnvio", haceEnvio)
         val resultadoGuardar = basedatosEscritura
             .insert(
                 "FLORERIA", // Nombre tabla
@@ -44,27 +47,7 @@ class SqliteHelperFloreria(
         basedatosEscritura.close()
         return if (resultadoGuardar.toInt() == -1) false else true
     }
-/*
-    fun listaFlorerias(): ArrayList<Floreria> {
-        val baseDatosLectura = readableDatabase
-        val arreglo = arrayListOf<Floreria>()
-        val scriptConsultaLectura = """
-            SELECT * FROM FLORERIA 
-        """.trimIndent()
-        val cursor = baseDatosLectura.rawQuery(scriptConsultaLectura, null)
-        while (cursor.moveToNext()) {
-            val id = cursor.getInt(1)
-            val nombre = cursor.getString(2)
-            val ubicacion = cursor.getString(3)
-            val telefono = cursor.getString(4)
-            val floreria = Floreria(id, nombre, ubicacion, telefono)
-            arreglo.add(floreria)
-        }
-        cursor.close()
-        baseDatosLectura.close()
-        return arreglo
-    }
-*/
+
 
     fun listaFlorerias(): ArrayList<Floreria> {
         val baseDatosLectura = readableDatabase
@@ -79,7 +62,8 @@ class SqliteHelperFloreria(
                 val nombre = cursor.getString(1)
                 val ubicacion = cursor.getString(2)
                 val telefono = cursor.getString(3)
-                val floreria = Floreria(id, nombre, ubicacion, telefono)
+                val haceEnvio = cursor.getString(4)
+                val floreria = Floreria(id, nombre, ubicacion, telefono, haceEnvio.toBoolean())
                 arreglo.add(floreria)
             }while (cursor.moveToNext())
         }

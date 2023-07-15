@@ -8,8 +8,6 @@ import android.widget.Button
 import android.widget.ListView
 
 
-//var arreglo = mutableListOf<Floreria>()
-
 
 class ListaFlorerias : AppCompatActivity() {
 
@@ -19,22 +17,6 @@ class ListaFlorerias : AppCompatActivity() {
 
 
         val florerias = BaseDeDatos.tablaFloreria!!.listaFlorerias()
-/*
-        val florerias= arrayListOf<Floreria>()
-
-            florerias
-                .add(
-                    Floreria(1, "Karla", "a@a.com", "3333")
-                )
-        florerias
-                .add(
-                    Floreria(2,"Vanessa", "b@b.com", "333332")
-                )
-        florerias
-                .add(
-                    Floreria(3, "Lucy", "c@c.com", "3333342")
-                )
-*/
 
         val listViewFlorerias = findViewById<ListView>(R.id.lv_florerias)
         val adaptador = ArrayAdapter(
@@ -51,8 +33,6 @@ class ListaFlorerias : AppCompatActivity() {
             irActividad(CrearFloreria::class.java)
         }
     }
-
-
 
 
     fun irActividad(clase: Class<*>){
