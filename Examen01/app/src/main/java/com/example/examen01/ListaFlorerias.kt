@@ -11,12 +11,18 @@ import android.widget.*
 
 var idItemSeleccionado = 0
 private lateinit var adaptador: ArrayAdapter<Floreria>
+val listaFlorerias = BaseDeDatos.tablaFloreria!!.listaFlorerias()
 
 class ListaFlorerias : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_florerias)
+
+
+
+        val intent = Intent(this, ListaFlores::class.java)
+        intent.putExtra("id", idItemSeleccionado)
 
         val listViewFlorerias = findViewById<ListView>(R.id.lv_florerias)
         adaptador = ArrayAdapter(
@@ -63,10 +69,6 @@ class ListaFlorerias : AppCompatActivity() {
                 "${idItemSeleccionado}"
                 val intent = Intent(this,ActualizarFloreria::class.java )
                 intent.putExtra("id", obtenerFlorerias()[idItemSeleccionado].id)
-
-                val intentFlor = Intent(this,ListaFlores::class.java )
-                intentFlor.putExtra("id", obtenerFlorerias()[idItemSeleccionado].id)
-
                 startActivity(intent)
                 adaptador.notifyDataSetChanged()
                 return true
@@ -81,21 +83,28 @@ class ListaFlorerias : AppCompatActivity() {
                 return true
             }R.id.mi_flores ->{
                 "${idItemSeleccionado}"
-                irActividad(ListaFlores::class.java)
+                irActividad(ListaFlores::class.java, listaFlorerias[idItemSeleccionado].id)
                 return true
             }
             else -> super.onContextItemSelected(item)
         }
     }
 
-    private fun obtenerFlorerias(): ArrayList<Floreria> {
+    fun obtenerFlorerias(): ArrayList<Floreria> {
         return BaseDeDatos.tablaFloreria!!.listaFlorerias()
     }
-
 
 
     fun irActividad(clase: Class<*>){
         val intent = Intent(this, clase)
         startActivity(intent)
     }
+
+    fun irActividad(clase: Class<*>, id: Int){
+        val intent = Intent(this, clase)
+        intent.putExtra("id", id)
+        startActivity(intent)
+    }
+
+
 }

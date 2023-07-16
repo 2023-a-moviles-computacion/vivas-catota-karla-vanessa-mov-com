@@ -16,6 +16,9 @@ import androidx.annotation.RequiresApi
 var idItemSeleccionadoFlor = 0
 private lateinit var adaptador: ArrayAdapter<Flor>
 class ListaFlores : AppCompatActivity() {
+
+    //val id = intentFlor.getIntExtra("id", -1)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_flores)
@@ -62,17 +65,17 @@ class ListaFlores : AppCompatActivity() {
         return when (item.itemId){
             R.id.mi_editar ->{
                 "${idItemSeleccionado}"
-                val intent = Intent(this,ActualizarFloreria::class.java )
-                intent.putExtra("id", obtenerFlores()[idItemSeleccionado].id)
-                startActivity(intent)
+                //val intent = Intent(this,ActualizarFloreria::class.java )
+                //intent.putExtra("id", obtenerFlores()[idItemSeleccionado].id)
+                //startActivity(intent)
                 adaptador.notifyDataSetChanged()
                 return true
             }
             R.id.mi_eliminar ->{
                 "${idItemSeleccionado}"
-                BaseDeDatos.tablaFlor!!.eliminarFloreriaFormulario(
-                    obtenerFlores()[idItemSeleccionado].id
-                )
+              //  BaseDeDatos.tablaFlor!!.eliminarFloreriaFormulario(
+               //     obtenerFlores()[idItemSeleccionado].id
+                //)
                 adaptador.notifyDataSetChanged()
                 irActividad(ListaFlorerias::class.java)
                 return true
@@ -81,12 +84,9 @@ class ListaFlores : AppCompatActivity() {
         }
     }
 
-
     private fun obtenerFlores(): ArrayList<Flor> {
         return BaseDeDatos.tablaFlor!!.listaFlores(intent.getIntExtra("id", -1))
     }
-
-
 
     fun irActividad(clase: Class<*>){
         val intent = Intent(this, clase)
