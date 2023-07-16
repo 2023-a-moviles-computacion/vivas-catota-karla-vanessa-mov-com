@@ -19,10 +19,16 @@ class ListaFlorerias : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_florerias)
 
+        fun irActividad(clase: Class<*>, idFloreria: Int){
+            val intent = Intent(this, clase)
+            startActivity(intent)
+        }
 
 
         val intent = Intent(this, ListaFlores::class.java)
         intent.putExtra("id", idItemSeleccionado)
+
+
 
         val listViewFlorerias = findViewById<ListView>(R.id.lv_florerias)
         adaptador = ArrayAdapter(

@@ -19,9 +19,14 @@ class ListaFlores : AppCompatActivity() {
 
     //val id = intentFlor.getIntExtra("id", -1)
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_flores)
+
+
+        val idFloreria = intent.getIntExtra("id", 0)
+
 
         val listViewFlores = findViewById<ListView>(R.id.lv_lista_flores)
         adaptador = ArrayAdapter(
@@ -40,7 +45,7 @@ class ListaFlores : AppCompatActivity() {
         val botonCrearFlor= findViewById<Button>(R.id.btn_crear_flor)
         botonCrearFlor
             .setOnClickListener {
-                irActividad(CrearFlor::class.java)
+                irActividad(CrearFlor::class.java, idFloreria)
             }
 
         registerForContextMenu(listViewFlores)
@@ -92,4 +97,11 @@ class ListaFlores : AppCompatActivity() {
         val intent = Intent(this, clase)
         startActivity(intent)
     }
+
+    fun irActividad(clase: Class<*>, idFloreria: Int){
+        val intent = Intent(this, clase)
+        intent.putExtra("idFloreria", idFloreria)
+        startActivity(intent)
+    }
+
 }

@@ -16,6 +16,8 @@ class CrearFlor : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crear_flor)
 
+        val idFloreria = intent.getIntExtra("idFloreria", 0)
+
         val botonCrearBDD = findViewById<Button>(R.id.btn_guardar_flor)
         botonCrearBDD
             .setOnClickListener {
@@ -45,13 +47,11 @@ class CrearFlor : AppCompatActivity() {
                     precio.setText("")
 
                     onDataChangedCallback?.invoke()
-                    irActividad(ListaFlores::class.java)
+                    irActividad(ListaFlores::class.java, idFloreria)
                 }else{
                     val aviso = Toast.makeText(this, "Debe llenar los campos!", Toast.LENGTH_LONG)
                     aviso.show()
-
                 }
-
 
             }
 
@@ -59,6 +59,12 @@ class CrearFlor : AppCompatActivity() {
 
     fun irActividad(clase: Class<*>){
         val intent = Intent(this, clase)
+        startActivity(intent)
+    }
+
+    fun irActividad(clase: Class<*>, idFloreria: Int){
+        val intent = Intent(this, clase)
+        intent.putExtra("idFloreria", idFloreria)
         startActivity(intent)
     }
 
