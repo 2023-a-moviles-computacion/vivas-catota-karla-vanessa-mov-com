@@ -4,6 +4,10 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.os.Build
+import androidx.annotation.RequiresApi
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class SqliteHelperFloreria(
     contexto: Context?,): SQLiteOpenHelper(
@@ -24,6 +28,20 @@ class SqliteHelperFloreria(
                ) 
             """.trimIndent()
         db?.execSQL(scriptSQLCrearTablaFloreria)
+
+        val scriptSQLCrearTablaFlor =
+            """
+               CREATE TABLE FLOR(
+               id INTEGER PRIMARY KEY AUTOINCREMENT,
+               idFloreria INTEGER,
+               nombre VARCHAR(50),
+               color VARCHAR(50),
+               esNativa VARCHAR(50),
+               fechaLlegada VARCHAR(50),
+               precio REAL
+               ) 
+            """.trimIndent()
+        db?.execSQL(scriptSQLCrearTablaFlor)
     }
 
     fun crearFloreria(
@@ -112,6 +130,59 @@ class SqliteHelperFloreria(
         return if(resultadoActualizacion.toInt() == -1) false else true
     }
 
+    //****flores
+    fun crearFlor(
+        //idFloreria: Int,
+        nombre: String,
+        color: String,
+        esNativa: String,
+        fechaLlegada: String,
+        precio: String
+    ): Boolean {
+        val basedatosEscritura = writableDatabase
+        val valoresAGuardar = ContentValues()
+        valoresAGuardar.put("nombre", nombre)
+        valoresAGuardar.put("color", color)
+        valoresAGuardar.put("esNativa", esNativa)
+        valoresAGuardar.put("fechaLlegada", fechaLlegada)
+        valoresAGuardar.put("precio", precio)
+        val resultadoGuardar = basedatosEscritura
+            .insert(
+                "FLOR", // Nombre tabla
+                null,
+                valoresAGuardar // valores
+            )
+        basedatosEscritura.close()
+        return if (resultadoGuardar.toInt() == -1) false else true
+    }
+
+
+    fun listaFlores(idFloreria: Int): ArrayList<Flor> {
+        val baseDatosLectura = readableDatabase
+        val arreglo = arrayListOf<Flor>()
+        val scriptConsultaLectura = """
+            SELECT * FROM FLOR WHERE idFloreria = ?
+        """.trimIndent()
+        val parametrosConsultaListaFlores = arrayOf( idFloreria.toString() )
+        val cursor = baseDatosLectura.rawQuery(scriptConsultaLectura, parametrosConsultaListaFlores)
+        if(cursor.moveToFirst()){
+            do{
+               // val idFloreria = cursor.getInt(0)
+                val id = cursor.getInt(1)
+                val nombre = cursor.getString(2)
+                val color = cursor.getString(3)
+                val esNativa = cursor.getString(4)
+                val fechaLlegada = cursor.getString(5)
+                val precio = cursor.getString(5)
+                val flor = Flor(idFloreria, id, nombre, color, esNativa.toBoolean(),
+                    fechaLlegada, precio.toDouble())
+                arreglo.add(flor)
+            }while (cursor.moveToNext())
+        }
+        cursor.close()
+        baseDatosLectura.close()
+        return arreglo
+    }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         TODO("Not yet implemented")

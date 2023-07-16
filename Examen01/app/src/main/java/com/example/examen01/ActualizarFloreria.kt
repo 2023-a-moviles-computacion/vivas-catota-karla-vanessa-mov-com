@@ -14,15 +14,6 @@ class ActualizarFloreria : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actualizar_floreria)
 
-        /*
-
-        val intentExplicito = Intent(this, ListaFlorerias::class.java)
-        intentExplicito.putExtra("nombre", nombre.toString())
-        intentExplicito.putExtra("ubicacion", ubicacion.toString())
-        intentExplicito.putExtra("telefono", telefono.toString())
-        intentExplicito.putExtra("haceEnvio", haceEnvio.toString())
-            //6.launch(intentExplicito)
-*/
         val botonActualizarBDD = findViewById<Button>(R.id.btn_actualizar_floreria)
         botonActualizarBDD
             .setOnClickListener {
@@ -73,17 +64,6 @@ class ActualizarFloreria : AppCompatActivity() {
     }
 
 
-/*
-    fun mandarDatos(){
-        val intent = Intent(this,ListaFlorerias::class.java )
-        intent.putExtra("nombre", nombre.toString())
-        intent.putExtra("ubicacion", ubicacion.toString())
-        intent.putExtra("telefono", telefono.toString())
-        intent.putExtra("haceEnvio", haceEnvio.toString())
-
-        startActivity(intent)
-    }
-*/
 
 
 

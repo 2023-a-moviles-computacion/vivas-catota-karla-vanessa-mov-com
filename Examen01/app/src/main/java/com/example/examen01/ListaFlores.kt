@@ -1,45 +1,46 @@
 package com.example.examen01
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ListView
+import androidx.annotation.RequiresApi
 
-
-var idItemSeleccionado = 0
-private lateinit var adaptador: ArrayAdapter<Floreria>
-
-class ListaFlorerias : AppCompatActivity() {
-
+var idItemSeleccionadoFlor = 0
+private lateinit var adaptador: ArrayAdapter<Flor>
+class ListaFlores : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lista_florerias)
+        setContentView(R.layout.activity_lista_flores)
 
-        val listViewFlorerias = findViewById<ListView>(R.id.lv_florerias)
+        val listViewFlores = findViewById<ListView>(R.id.lv_lista_flores)
         adaptador = ArrayAdapter(
             this, // Contexto
             android.R.layout.simple_list_item_1, // como se va a ver (XML)
-            obtenerFlorerias()
+            obtenerFlores()
         )
-        listViewFlorerias.adapter = adaptador
+        listViewFlores.adapter = adaptador
         adaptador.notifyDataSetChanged()
 
-        val crearFloreria = CrearFloreria()
-        crearFloreria.setOnDataChangedCallback {
+        val crearFlor = CrearFlor()
+        crearFlor.setOnDataChangedCallback {
             adaptador.notifyDataSetChanged()
         }
 
-        val botonCrearFloreria= findViewById<Button>(R.id.btn_crear_floreria)
-        botonCrearFloreria
+        val botonCrearFlor= findViewById<Button>(R.id.btn_crear_flor)
+        botonCrearFlor
             .setOnClickListener {
-                irActividad(CrearFloreria::class.java)
-        }
+                irActividad(CrearFlor::class.java)
+            }
 
-        registerForContextMenu(listViewFlorerias)
-
+        registerForContextMenu(listViewFlores)
     }
 
     override fun onCreateContextMenu(
@@ -62,34 +63,27 @@ class ListaFlorerias : AppCompatActivity() {
             R.id.mi_editar ->{
                 "${idItemSeleccionado}"
                 val intent = Intent(this,ActualizarFloreria::class.java )
-                intent.putExtra("id", obtenerFlorerias()[idItemSeleccionado].id)
-
-                val intentFlor = Intent(this,ListaFlores::class.java )
-                intentFlor.putExtra("id", obtenerFlorerias()[idItemSeleccionado].id)
-
+                intent.putExtra("id", obtenerFlores()[idItemSeleccionado].id)
                 startActivity(intent)
                 adaptador.notifyDataSetChanged()
                 return true
             }
             R.id.mi_eliminar ->{
                 "${idItemSeleccionado}"
-                    BaseDeDatos.tablaFloreria!!.eliminarFloreriaFormulario(
-                            obtenerFlorerias()[idItemSeleccionado].id
-                    )
+                BaseDeDatos.tablaFlor!!.eliminarFloreriaFormulario(
+                    obtenerFlores()[idItemSeleccionado].id
+                )
                 adaptador.notifyDataSetChanged()
                 irActividad(ListaFlorerias::class.java)
-                return true
-            }R.id.mi_flores ->{
-                "${idItemSeleccionado}"
-                irActividad(ListaFlores::class.java)
                 return true
             }
             else -> super.onContextItemSelected(item)
         }
     }
 
-    private fun obtenerFlorerias(): ArrayList<Floreria> {
-        return BaseDeDatos.tablaFloreria!!.listaFlorerias()
+
+    private fun obtenerFlores(): ArrayList<Flor> {
+        return BaseDeDatos.tablaFlor!!.listaFlores(intent.getIntExtra("id", -1))
     }
 
 
