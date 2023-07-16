@@ -111,44 +111,7 @@ class SqliteHelperFloreria(
         conexionEscritura.close()
         return if(resultadoActualizacion.toInt() == -1) false else true
     }
-/*
-    fun consultarFloreriaPorID(id: Int): Floreria{
-        val baseDatosLectura = readableDatabase
-        val scriptConsultaLectura = """
-            SELECT * FROM FLORERIA WHERE ID = ?
-        """.trimIndent()
-        val parametrosConsultaLectura = arrayOf(id.toString())
-        val resultadoConsultaLectura = baseDatosLectura.rawQuery(
-            scriptConsultaLectura, // Consulta
-            parametrosConsultaLectura, // Parametros
-        )
 
-        // logica busqueda
-        val existeUsuario = resultadoConsultaLectura.moveToFirst()
-        val usuarioEncontrado = Floreria(0, "" , "", "",false)
-        val arreglo = arrayListOf<Floreria>()
-        if(existeUsuario){
-            do{
-                val id= resultadoConsultaLectura.getInt(0) // Indice 0
-                val nombre = resultadoConsultaLectura.getString(1)
-                val ubicacion = resultadoConsultaLectura.getString(2)
-                val telefono = resultadoConsultaLectura.getString(3)
-                val haceEnvio = resultadoConsultaLectura.getString(4)
-                if(id != null){
-                    // llenar el arreglo con un nuevo BEntrenador
-                    usuarioEncontrado.id = id
-                    usuarioEncontrado.nombre = nombre
-                    usuarioEncontrado.ubicacion = ubicacion
-                    usuarioEncontrado.telefono = telefono
-                    usuarioEncontrado.haceEnvio = haceEnvio.toBoolean()
-                }
-            } while (resultadoConsultaLectura.moveToNext())
-        }
-        resultadoConsultaLectura.close()
-        baseDatosLectura.close()
-        return usuarioEncontrado
-    }
-*/
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         TODO("Not yet implemented")

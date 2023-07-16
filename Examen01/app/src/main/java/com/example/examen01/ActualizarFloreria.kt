@@ -14,10 +14,19 @@ class ActualizarFloreria : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actualizar_floreria)
 
+        /*
 
+        val intentExplicito = Intent(this, ListaFlorerias::class.java)
+        intentExplicito.putExtra("nombre", nombre.toString())
+        intentExplicito.putExtra("ubicacion", ubicacion.toString())
+        intentExplicito.putExtra("telefono", telefono.toString())
+        intentExplicito.putExtra("haceEnvio", haceEnvio.toString())
+            //6.launch(intentExplicito)
+*/
         val botonActualizarBDD = findViewById<Button>(R.id.btn_actualizar_floreria)
         botonActualizarBDD
             .setOnClickListener {
+                val id = intent.getIntExtra("id", -1)
                 //val id = findViewById<ListView>(
                 val nombre = findViewById<EditText>(R.id.input_actualizar_nombre)
                 val ubicacion = findViewById<EditText>(R.id.input_actualizar_ubicacion)
@@ -26,16 +35,20 @@ class ActualizarFloreria : AppCompatActivity() {
                 if (nombre.text.toString().isNotEmpty() && ubicacion.text.toString().isNotEmpty()
                     && telefono.text.toString().isNotEmpty()){
                     BaseDeDatos.tablaFloreria!!.actualizarFloreria(
-                        idItemSeleccionado,
+                        id,
                         nombre.text.toString(),
                         ubicacion.text.toString(),
                         telefono.text.toString(),
                         haceEnvio.isChecked.toString()
                     )
-                    nombre.setText("")
-                    ubicacion.setText("")
-                    telefono.setText("")
-                    haceEnvio.isChecked=false
+
+                    Toast.makeText(this, "Florería actualizada", Toast.LENGTH_SHORT).show()
+                    //finish()
+
+                    //nombre.setText("")
+                    ///ubicacion.setText("")
+                    //telefono.setText("")
+                    //haceEnvio.isChecked=false
                     onDataChangedCallback?.invoke()
                     irActividad(ListaFlorerias::class.java)
                     //mandarDatos()
@@ -51,9 +64,12 @@ class ActualizarFloreria : AppCompatActivity() {
             val intent = Intent(this, clase)
             startActivity(intent)
         }
+
+
         fun setOnDataChangedCallback(callback: () -> Unit) {
             onDataChangedCallback = callback
         }
+
     }
 
 

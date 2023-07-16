@@ -66,16 +66,15 @@ class ListaFlorerias : AppCompatActivity() {
         return when (item.itemId){
             R.id.mi_editar ->{
                 "${idItemSeleccionado}"
-                val nombre = intent.getStringExtra("nombre")
-                val ubicacion = intent.getStringExtra("ubicacion")
-                val telefono = intent.getStringExtra("telefono")
-                val haceEnvio = intent.getStringExtra("haceEnvio")
-                BaseDeDatos.tablaFloreria!!.actualizarFloreria(
-                    idItemSeleccionado, nombre.toString(),
-                ubicacion.toString(), telefono.toString(), haceEnvio.toString())
-                obtenerFlorerias()
+               // val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
+                //val floreriaSeleccionada = adaptador.getItem(info.position)
+                val intent = Intent(this,ActualizarFloreria::class.java )
+                //intent.putExtra("id", floreriaSeleccionada?.id)
+                intent.putExtra("id", obtenerFlorerias()[idItemSeleccionado].id)
+                startActivity(intent)
+                //obtenerFlorerias()
                 adaptador.notifyDataSetChanged()
-                irActividad(ListaFlorerias::class.java)
+                //irActividad(ActualizarFloreria::class.java)
                 return true
             }
             R.id.mi_eliminar ->{
@@ -83,7 +82,7 @@ class ListaFlorerias : AppCompatActivity() {
                     BaseDeDatos.tablaFloreria!!.eliminarFloreriaFormulario(
                             obtenerFlorerias()[idItemSeleccionado].id
                     )
-                obtenerFlorerias()
+               // obtenerFlorerias()
                 adaptador.notifyDataSetChanged()
                 irActividad(ListaFlorerias::class.java)
                 // abrirDialogo()
