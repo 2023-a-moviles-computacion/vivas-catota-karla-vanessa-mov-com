@@ -34,6 +34,10 @@ class CrearFlor : AppCompatActivity() {
                         fechaLlegada.text.toString(),
                         precio.text.toString()
                     )
+
+                    val aviso = Toast.makeText(this, "Flor creada", Toast.LENGTH_LONG)
+                    aviso.show()
+
                     nombre.setText("")
                     color.setText("")
                     esNativa.isChecked=false
@@ -41,7 +45,7 @@ class CrearFlor : AppCompatActivity() {
                     precio.setText("")
 
                     onDataChangedCallback?.invoke()
-                    irActividad(ListaFlorerias::class.java)
+                    irActividad(ListaFlores::class.java)
                 }else{
                     val aviso = Toast.makeText(this, "Debe llenar los campos!", Toast.LENGTH_LONG)
                     aviso.show()

@@ -34,6 +34,7 @@ class ListaFlorerias : AppCompatActivity() {
         adaptador.notifyDataSetChanged()
 
         val crearFloreria = CrearFloreria()
+
         crearFloreria.setOnDataChangedCallback {
             adaptador.notifyDataSetChanged()
         }
@@ -61,6 +62,7 @@ class ListaFlorerias : AppCompatActivity() {
         val info = menuInfo as AdapterView.AdapterContextMenuInfo
         val id = info.position
         idItemSeleccionado = id
+
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
@@ -83,6 +85,8 @@ class ListaFlorerias : AppCompatActivity() {
                 return true
             }R.id.mi_flores ->{
                 "${idItemSeleccionado}"
+                //val intent = Intent(this, ListaFlores::class.java)
+                //intent.putExtra("id", )
                 irActividad(ListaFlores::class.java, listaFlorerias[idItemSeleccionado].id)
                 return true
             }

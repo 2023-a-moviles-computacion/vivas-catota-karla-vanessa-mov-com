@@ -76,8 +76,8 @@ class ListaFlores : AppCompatActivity() {
               //  BaseDeDatos.tablaFlor!!.eliminarFloreriaFormulario(
                //     obtenerFlores()[idItemSeleccionado].id
                 //)
-                adaptador.notifyDataSetChanged()
-                irActividad(ListaFlorerias::class.java)
+                //adaptador.notifyDataSetChanged()
+                //irActividad(ListaFlores::class.java)
                 return true
             }
             else -> super.onContextItemSelected(item)
@@ -85,7 +85,7 @@ class ListaFlores : AppCompatActivity() {
     }
 
     private fun obtenerFlores(): ArrayList<Flor> {
-        return BaseDeDatos.tablaFlor!!.listaFlores(intent.getIntExtra("id", -1))
+        return BaseDeDatos.tablaFloreria!!.listaFlores(intent.getIntExtra("id", -1))
     }
 
     fun irActividad(clase: Class<*>){
