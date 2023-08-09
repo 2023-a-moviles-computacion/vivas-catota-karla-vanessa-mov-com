@@ -1,6 +1,5 @@
 package com.example.deber2_sqlite
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,8 +10,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 
 private lateinit var adaptador: ArrayAdapter<Floreria>
 var idItemSeleccionado = 0
@@ -30,7 +27,7 @@ class ListaFlorerias : AppCompatActivity() {
             this, // Contexto
             android.R.layout.simple_list_item_1, // como se va a ver (XML)
             //listaFlorerias
-        obtenerFlorerias()
+            obtenerFlorerias()
         )
 
         listViewFlorerias.adapter = adaptador
@@ -47,13 +44,6 @@ class ListaFlorerias : AppCompatActivity() {
         registerForContextMenu(listViewFlorerias)
     }
 
-
-    override fun onResume() {
-        super.onResume()
-        adaptador.clear()
-        adaptador.addAll(obtenerFlorerias())
-        adaptador.notifyDataSetChanged()
-    }
     override fun onCreateContextMenu(
         menu: ContextMenu?,
         v: View?,
@@ -74,13 +64,13 @@ class ListaFlorerias : AppCompatActivity() {
             R.id.mi_editar ->{
                 val intent = Intent(this,ActualizarFloreria::class.java )
                // intent.putExtra("id", listaFlorerias[idItemSeleccionado].id)
-                intent.putExtra("id", obtenerFlorerias()[idItemSeleccionado].id)
+                intent.putExtra("idFloreriaSeleccionada", obtenerFlorerias()[idItemSeleccionado].id)
                 startActivity(intent)
                 //adaptador.notifyDataSetChanged()
                 return true
             }
             R.id.mi_eliminar ->{
-                BaseDeDatos.dbfloreria!!.eliminarFloreriaFormulario(
+                BaseDeDatos.dbfloreria!!.eliminarFloreria(
                     //listaFlorerias[idItemSeleccionado].id
                     obtenerFlorerias()[idItemSeleccionado].id
                 )
@@ -90,20 +80,26 @@ class ListaFlorerias : AppCompatActivity() {
                 //irActividad(ListaFlorerias::class.java)
                 return true
             }R.id.mi_flores ->{
-                //val intent = Intent(this, ListaFlores::class.java)
-                //intent.putExtra("id", )
-              //  irActividad(ListaFlores::class.java, listaFlorerias[idItemSeleccionado].id)
+                val intent = Intent(this, ListaFlores::class.java)
+                intent.putExtra("idFloreriaSeleccionada", obtenerFlorerias()[idItemSeleccionado].id)
+                startActivity(intent)
                 return true
             }
             else -> super.onContextItemSelected(item)
         }
-
-
     }
 
     fun obtenerFlorerias(): ArrayList<Floreria> {
         return BaseDeDatos.dbfloreria!!.listarFlorerias()
     }
+
+    override fun onResume() {
+        super.onResume()
+        adaptador.clear()
+        adaptador.addAll(obtenerFlorerias())
+        adaptador.notifyDataSetChanged()
+    }
+
 
     fun irActividad(clase: Class<*>){
         val intent = Intent(this, clase)

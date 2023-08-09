@@ -13,6 +13,27 @@
         android:theme="@style/Theme.Deber2Sqlite"
         tools:targetApi="31">
         <activity
+            android:name=".ActualizarFlor"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CrearFlor"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ListaFlores"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ActualizarFloreria"
             android:exported="false">
             <meta-data

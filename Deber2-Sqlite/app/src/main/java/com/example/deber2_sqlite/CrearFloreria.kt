@@ -10,7 +10,6 @@ import android.widget.Toast
 
 class CrearFloreria : AppCompatActivity() {
 
-    private var onDataChangedCallback: (() -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,17 +31,14 @@ class CrearFloreria : AppCompatActivity() {
                         haceEnvio.isChecked.toString()
                     )
                     Toast.makeText(this, "Florería creada", Toast.LENGTH_SHORT).show()
+
                     nombre.setText("")
                     ubicacion.setText("")
                     telefono.setText("")
                     haceEnvio.isChecked=false
-                    //onDataChangedCallback?.invoke()
                     finish()
-                    //irActividad(ListaFlorerias::class.java)
                 }else{
-                    val aviso = Toast.makeText(this, "Debe llenar los campos!", Toast.LENGTH_LONG)
-                    aviso.show()
-
+                    Toast.makeText(this, "Debe llenar los campos!", Toast.LENGTH_LONG).show()
                 }
             }
     }
@@ -53,9 +49,6 @@ class CrearFloreria : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun setOnDataChangedCallback(callback: () -> Unit) {
-        onDataChangedCallback = callback
-    }
 
 }
 

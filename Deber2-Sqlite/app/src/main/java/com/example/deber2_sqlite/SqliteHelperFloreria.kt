@@ -72,7 +72,7 @@ class SqliteHelperFloreria(
         val scriptConsultaLectura =
             """
                 SELECT * FROM FLORERIA 
-                """.trimIndent()
+            """.trimIndent()
         val cursor = baseDatosLectura.rawQuery(scriptConsultaLectura, null)
         if(cursor.moveToFirst()){
             do{
@@ -116,7 +116,7 @@ class SqliteHelperFloreria(
         return if(resultadoActualizacion.toInt() == -1) false else true
     }
 
-    fun eliminarFloreriaFormulario(id:Int):Boolean{
+    fun eliminarFloreria(id:Int):Boolean{
         val conexionEscritura = writableDatabase
         // where ID = ?
         val parametrosConsultaDelete = arrayOf( id.toString() )
@@ -130,6 +130,59 @@ class SqliteHelperFloreria(
         return if(resultadoEliminacion.toInt() == -1) false else true
     }
 
+    //****flores
+    fun crearFlor(
+        idFloreria: Int,
+        nombre: String,
+        color: String,
+        esNativa: String,
+        fechaLlegada: String,
+        precio: String
+    ): Boolean {
+        val basedatosEscritura = writableDatabase
+        val valoresAGuardar = ContentValues()
+        valoresAGuardar.put("idFloreria", idFloreria)
+        valoresAGuardar.put("nombre", nombre)
+        valoresAGuardar.put("color", color)
+        valoresAGuardar.put("esNativa", esNativa)
+        valoresAGuardar.put("fechaLlegada", fechaLlegada)
+        valoresAGuardar.put("precio", precio)
+        val resultadoGuardar = basedatosEscritura
+            .insert(
+                "FLOR", // Nombre tabla
+                null,
+                valoresAGuardar // valores
+            )
+        basedatosEscritura.close()
+        return if (resultadoGuardar.toInt() == -1) false else true
+    }
+
+    fun listarFlores(idFloreria: Int): ArrayList<Flor> {
+        val baseDatosLectura = readableDatabase
+        val arreglo = arrayListOf<Flor>()
+        val scriptConsultaLectura =
+            """
+                SELECT * FROM FLOR WHERE idFloreria = ?
+            """.trimIndent()
+        val parametrosConsultaListaFlores = arrayOf( idFloreria.toString() )
+        val cursor = baseDatosLectura.rawQuery(scriptConsultaLectura, parametrosConsultaListaFlores)
+        if(cursor.moveToFirst()){
+            do{
+                val id = cursor.getInt(1)
+                val nombre = cursor.getString(2)
+                val color = cursor.getString(3)
+                val esNativa = cursor.getString(4)
+                val fechaLlegada = cursor.getString(5)
+                val precio = cursor.getDouble(6)
+                val flor = Flor(idFloreria, id, nombre, color, esNativa.toBoolean(),
+                    fechaLlegada, precio)
+                arreglo.add(flor)
+            }while (cursor.moveToNext())
+        }
+        cursor.close()
+        baseDatosLectura.close()
+        return arreglo
+    }
 
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
