@@ -14,7 +14,6 @@ class CrearFlor : AppCompatActivity() {
 
         idFloreria = intent.getIntExtra("idFloreriaSeleccionada",0).toString()
 
-
         val name = findViewById<TextView>(R.id.tv_floreria2)
         name.setText(idFloreria)
 

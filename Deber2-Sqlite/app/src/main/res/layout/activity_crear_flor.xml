@@ -10,9 +10,10 @@
         android:id="@+id/tv_floreria2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="104dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +32,7 @@
 
     <EditText
         android:id="@+id/input_color_flor"
-        android:layout_width="320dp"
+        android:layout_width="323dp"
         android:layout_height="52dp"
         android:layout_marginTop="24dp"
         android:ems="10"
@@ -43,22 +44,22 @@
 
     <EditText
         android:id="@+id/input_fecha_llegada"
-        android:layout_width="295dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="323dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Fecha de llegada"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="@+id/cb_es_nativa"
-        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/cb_es_nativa"
         app:layout_constraintTop_toBottomOf="@+id/cb_es_nativa" />
 
     <EditText
         android:id="@+id/input_precio"
-        android:layout_width="296dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="323dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Precio"
         android:inputType="numberDecimal"
@@ -80,12 +81,35 @@
 
     <CheckBox
         android:id="@+id/cb_es_nativa"
-        android:layout_width="318dp"
+        android:layout_width="323dp"
         android:layout_height="56dp"
         android:layout_marginTop="20dp"
         android:text="¿Es nativa?"
         app:layout_constraintEnd_toEndOf="@+id/input_color_flor"
         app:layout_constraintStart_toStartOf="@+id/input_color_flor"
         app:layout_constraintTop_toBottomOf="@+id/input_color_flor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:text="ID Floreria:"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tv_floreria2"
+        app:layout_constraintHorizontal_bias="0.934"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_floreria2" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Registro de flor"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_floreria2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,4 +6,111 @@
     android:layout_height="match_parent"
     tools:context=".ActualizarFlor">
 
+    <TextView
+        android:id="@+id/tv_flor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <EditText
+        android:id="@+id/input_nombre_flor_actualizar"
+        android:layout_width="323dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:hint="Nombre"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/tv_flor"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="@+id/tv_flor"
+        app:layout_constraintTop_toBottomOf="@+id/tv_flor" />
+
+    <CheckBox
+        android:id="@+id/cb_es_nativa_actualizar"
+        android:layout_width="323dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="28dp"
+        android:text="¿Es nativa?"
+        app:layout_constraintEnd_toEndOf="@+id/input_color_flor_actualizar"
+        app:layout_constraintStart_toStartOf="@+id/input_color_flor_actualizar"
+        app:layout_constraintTop_toBottomOf="@+id/input_color_flor_actualizar" />
+
+    <EditText
+        android:id="@+id/input_fecha_llegada_actualizar"
+        android:layout_width="323dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="Fecha de llegada"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="@+id/cb_es_nativa_actualizar"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="@+id/cb_es_nativa_actualizar"
+        app:layout_constraintTop_toBottomOf="@+id/cb_es_nativa_actualizar" />
+
+    <EditText
+        android:id="@+id/input_precio_actualizar"
+        android:layout_width="323dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="Precio"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="@+id/input_fecha_llegada_actualizar"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/input_fecha_llegada_actualizar"
+        app:layout_constraintTop_toBottomOf="@+id/input_fecha_llegada_actualizar" />
+
+    <Button
+        android:id="@+id/btn_actualizar_flor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Actualizar"
+        app:layout_constraintEnd_toEndOf="@+id/input_precio_actualizar"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="@+id/input_precio_actualizar"
+        app:layout_constraintTop_toBottomOf="@+id/input_precio_actualizar" />
+
+    <EditText
+        android:id="@+id/input_color_flor_actualizar"
+        android:layout_width="323dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Color"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/input_nombre_flor_actualizar"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="@+id/input_nombre_flor_actualizar"
+        app:layout_constraintTop_toBottomOf="@+id/input_nombre_flor_actualizar" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="Actualización de flor"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="80dp"
+        android:text="Nombre:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_flor"
+        app:layout_constraintEnd_toStartOf="@+id/tv_flor"
+        app:layout_constraintTop_toTopOf="@+id/tv_flor"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

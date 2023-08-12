@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ListView
+import android.widget.*
 
 private lateinit var adaptador: ArrayAdapter<Floreria>
 var idItemSeleccionado = 0
@@ -38,7 +35,6 @@ class ListaFlorerias : AppCompatActivity() {
         botonCrearFloreria
             .setOnClickListener {
                 irActividad(CrearFloreria::class.java)
-
             }
 
         registerForContextMenu(listViewFlorerias)
@@ -63,10 +59,9 @@ class ListaFlorerias : AppCompatActivity() {
         return when (item.itemId){
             R.id.mi_editar ->{
                 val intent = Intent(this,ActualizarFloreria::class.java )
-               // intent.putExtra("id", listaFlorerias[idItemSeleccionado].id)
                 intent.putExtra("idFloreriaSeleccionada", obtenerFlorerias()[idItemSeleccionado].id)
+                intent.putExtra("nombreFloreria", obtenerFlorerias()[idItemSeleccionado].nombre)
                 startActivity(intent)
-                //adaptador.notifyDataSetChanged()
                 return true
             }
             R.id.mi_eliminar ->{
@@ -75,6 +70,7 @@ class ListaFlorerias : AppCompatActivity() {
                     obtenerFlorerias()[idItemSeleccionado].id
                 )
                 adaptador.remove(adaptador.getItem(idItemSeleccionado))
+                Toast.makeText(this, "Florería eliminada", Toast.LENGTH_SHORT).show()
                 adaptador.notifyDataSetChanged()
 
                 //irActividad(ListaFlorerias::class.java)

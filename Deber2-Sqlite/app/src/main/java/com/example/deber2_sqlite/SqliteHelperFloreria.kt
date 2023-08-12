@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.widget.Toast
 
 class SqliteHelperFloreria(
     contexto: Context?,): SQLiteOpenHelper(
@@ -121,11 +122,13 @@ class SqliteHelperFloreria(
         // where ID = ?
         val parametrosConsultaDelete = arrayOf( id.toString() )
         val resultadoEliminacion = conexionEscritura
+
             .delete(
                 "FLORERIA", // Nombre tabla
                 "id=?", // Consulta Where
                 parametrosConsultaDelete
             )
+
         conexionEscritura.close()
         return if(resultadoEliminacion.toInt() == -1) false else true
     }
@@ -182,6 +185,48 @@ class SqliteHelperFloreria(
         cursor.close()
         baseDatosLectura.close()
         return arreglo
+    }
+
+    fun eliminarFlor(id:Int):Boolean{
+        val conexionEscritura = writableDatabase
+        // where ID = ?
+        val parametrosConsultaDelete = arrayOf( id.toString() )
+        val resultadoEliminacion = conexionEscritura
+            .delete(
+                "FLOR", // Nombre tabla
+                "id=?", // Consulta Where
+                parametrosConsultaDelete
+            )
+        conexionEscritura.close()
+        return if(resultadoEliminacion.toInt() == -1) false else true
+    }
+
+    fun actualizarFlor(
+        id:Int,
+        nombre: String,
+        color: String,
+        esNativa: String,
+        fechaLlegada: String,
+        precio: String
+    ):Boolean{
+        val conexionEscritura = writableDatabase
+        val valoresAActualizar = ContentValues()
+        valoresAActualizar.put("nombre", nombre)
+        valoresAActualizar.put("color", color)
+        valoresAActualizar.put("esNativa", esNativa)
+        valoresAActualizar.put("fechaLlegada", fechaLlegada)
+        valoresAActualizar.put("precio", precio)
+        // where ID = ?
+        val parametrosConsultaActualizar = arrayOf( id.toString() )
+        val resultadoActualizacion = conexionEscritura
+            .update(
+                "FLOR", // Nombre tabla
+                valoresAActualizar, // Valores
+                "id=?", // Consulta Where
+                parametrosConsultaActualizar
+            )
+        conexionEscritura.close()
+        return if(resultadoActualizacion.toInt() == -1) false else true
     }
 
 

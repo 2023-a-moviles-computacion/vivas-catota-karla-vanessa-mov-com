@@ -10,29 +10,28 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="64dp"
         android:text="Actualización de floreria"
-        android:textSize="34sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/input_actualizar_nombre"
-        android:layout_width="307dp"
+        android:layout_width="323dp"
         android:layout_height="53dp"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Nombre"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/textView4"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_floreria3"
+        app:layout_constraintStart_toStartOf="@+id/tv_floreria3"
+        app:layout_constraintTop_toBottomOf="@+id/tv_floreria3" />
 
     <EditText
         android:id="@+id/input_actualizar_ubicacion"
-        android:layout_width="307dp"
+        android:layout_width="323dp"
         android:layout_height="52dp"
         android:layout_marginTop="32dp"
         android:ems="10"
@@ -45,11 +44,12 @@
 
     <CheckBox
         android:id="@+id/cb_actualizar_hace_envio"
-        android:layout_width="291dp"
+        android:layout_width="323dp"
         android:layout_height="52dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:text="¿Hace envio?"
         app:layout_constraintEnd_toEndOf="@+id/input_actualizar_telefono"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/input_actualizar_telefono"
         app:layout_constraintTop_toBottomOf="@+id/input_actualizar_telefono" />
 
@@ -57,16 +57,16 @@
         android:id="@+id/btn_actualizar_floreria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="52dp"
         android:text="Actualizar"
         app:layout_constraintEnd_toEndOf="@+id/cb_actualizar_hace_envio"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="@+id/cb_actualizar_hace_envio"
         app:layout_constraintTop_toBottomOf="@+id/cb_actualizar_hace_envio" />
 
     <EditText
         android:id="@+id/input_actualizar_telefono"
-        android:layout_width="307dp"
+        android:layout_width="323dp"
         android:layout_height="58dp"
         android:layout_marginTop="24dp"
         android:ems="10"
@@ -76,5 +76,27 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/input_actualizar_ubicacion"
         app:layout_constraintTop_toBottomOf="@+id/input_actualizar_ubicacion" />
+
+    <TextView
+        android:id="@+id/tv_floreria3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintHorizontal_bias="0.537"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="76dp"
+        android:text="Nombre:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_floreria3"
+        app:layout_constraintEnd_toStartOf="@+id/tv_floreria3"
+        app:layout_constraintTop_toTopOf="@+id/tv_floreria3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

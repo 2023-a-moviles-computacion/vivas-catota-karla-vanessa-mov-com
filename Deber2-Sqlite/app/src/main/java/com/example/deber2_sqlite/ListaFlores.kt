@@ -62,24 +62,20 @@ class ListaFlores : AppCompatActivity() {
     override fun onContextItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             R.id.mi_editar2 ->{
-                /*
                 val intent = Intent(this,ActualizarFlor::class.java )
-                intent.putExtra("id", obtenerFlores()[idItemSeleccionado].id)
+                intent.putExtra("idFlorSeleccionada", obtenerFlores()[idFlorSeleccionada].id)
+                intent.putExtra("nombreFlor", obtenerFlores()[idFlorSeleccionada].nombre)
                 startActivity(intent)
-
-                 */
                 return true
 
             }
             R.id.mi_eliminar2 ->{
-                /*BaseDeDatos.dbfloreria!!.eliminarFlor(
-
+                BaseDeDatos.dbfloreria!!.eliminarFlor(
                     obtenerFlores()[idItemSeleccionado].id
                 )
-                adaptador.remove(adaptador.getItem(idItemSeleccionado))
-                adaptador.notifyDataSetChanged()
-
-                 */
+                adaptadorFlor.remove(adaptadorFlor.getItem(idFlorSeleccionada))
+                Toast.makeText(this, "Flor eliminada", Toast.LENGTH_SHORT).show()
+                adaptadorFlor.notifyDataSetChanged()
                 return true
             }
             else -> super.onContextItemSelected(item)
@@ -89,7 +85,6 @@ class ListaFlores : AppCompatActivity() {
     private fun obtenerFlores(): ArrayList<Flor> {
         //val idFloreria = intent.getIntExtra("idFloreriaSeleccionada",0)
         return BaseDeDatos.dbfloreria!!.listarFlores(idFloreria.toInt())
-        //return BaseDeDatos.tablaFloreria!!.listaFlores(idFloreria)
     }
 
 

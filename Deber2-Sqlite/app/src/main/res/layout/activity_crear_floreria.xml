@@ -8,25 +8,27 @@
 
     <EditText
         android:id="@+id/input_nombre_floreria"
-        android:layout_width="334dp"
+        android:layout_width="323dp"
         android:layout_height="53dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="44dp"
         android:autoText="false"
         android:ems="10"
         android:hint="Nombre"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
         android:id="@+id/input_ubicacion"
-        android:layout_width="336dp"
+        android:layout_width="323dp"
         android:layout_height="66dp"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Ubicación"
         android:inputType="textPersonName"
+        android:selectAllOnFocus="false"
+        android:singleLine="false"
         app:layout_constraintEnd_toEndOf="@+id/input_nombre_floreria"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/input_nombre_floreria"
@@ -34,7 +36,7 @@
 
     <EditText
         android:id="@+id/input_telefono"
-        android:layout_width="336dp"
+        android:layout_width="323dp"
         android:layout_height="65dp"
         android:layout_marginTop="28dp"
         android:ems="10"
@@ -58,7 +60,7 @@
 
     <CheckBox
         android:id="@+id/cb_hace_envio"
-        android:layout_width="336dp"
+        android:layout_width="323dp"
         android:layout_height="52dp"
         android:layout_marginTop="16dp"
         android:text="¿Hace envio?"
