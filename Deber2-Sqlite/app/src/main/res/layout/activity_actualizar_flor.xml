@@ -20,12 +20,12 @@
         android:id="@+id/input_nombre_flor_actualizar"
         android:layout_width="323dp"
         android:layout_height="55dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Nombre"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/tv_flor"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/tv_flor"
         app:layout_constraintTop_toBottomOf="@+id/tv_flor" />
 
@@ -33,9 +33,10 @@
         android:id="@+id/cb_es_nativa_actualizar"
         android:layout_width="323dp"
         android:layout_height="56dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:text="¿Es nativa?"
         app:layout_constraintEnd_toEndOf="@+id/input_color_flor_actualizar"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/input_color_flor_actualizar"
         app:layout_constraintTop_toBottomOf="@+id/input_color_flor_actualizar" />
 
@@ -43,12 +44,12 @@
         android:id="@+id/input_fecha_llegada_actualizar"
         android:layout_width="323dp"
         android:layout_height="63dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Fecha de llegada"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="@+id/cb_es_nativa_actualizar"
-        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/cb_es_nativa_actualizar"
         app:layout_constraintTop_toBottomOf="@+id/cb_es_nativa_actualizar" />
 

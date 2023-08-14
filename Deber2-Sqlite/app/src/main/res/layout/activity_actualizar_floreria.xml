@@ -21,11 +21,12 @@
         android:id="@+id/input_actualizar_nombre"
         android:layout_width="323dp"
         android:layout_height="53dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Nombre"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/tv_floreria3"
+        app:layout_constraintHorizontal_bias="0.528"
         app:layout_constraintStart_toStartOf="@+id/tv_floreria3"
         app:layout_constraintTop_toBottomOf="@+id/tv_floreria3" />
 

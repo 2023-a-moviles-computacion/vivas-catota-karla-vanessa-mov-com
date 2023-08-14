@@ -71,7 +71,7 @@ class ListaFlores : AppCompatActivity() {
             }
             R.id.mi_eliminar2 ->{
                 BaseDeDatos.dbfloreria!!.eliminarFlor(
-                    obtenerFlores()[idItemSeleccionado].id
+                    obtenerFlores()[idFlorSeleccionada].id
                 )
                 adaptadorFlor.remove(adaptadorFlor.getItem(idFlorSeleccionada))
                 Toast.makeText(this, "Flor eliminada", Toast.LENGTH_SHORT).show()
