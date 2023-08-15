@@ -18,7 +18,7 @@ class ActualizarFloreria : AppCompatActivity(){
         val botonActualizarBDD = findViewById<Button>(R.id.btn_actualizar_floreria)
         botonActualizarBDD
             .setOnClickListener {
-                val idItemSeleccionado = intent.getIntExtra("id",-1)
+                val idItemSeleccionado = intent.getIntExtra("idFloreriaSeleccionada",-1)
                 //val id = findViewById<ListView>(
                 val nombre = findViewById<EditText>(R.id.input_actualizar_nombre)
                 val ubicacion = findViewById<EditText>(R.id.input_actualizar_ubicacion)
