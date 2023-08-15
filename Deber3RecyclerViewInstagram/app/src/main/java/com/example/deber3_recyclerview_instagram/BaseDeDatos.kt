@@ -6,15 +6,15 @@ class BaseDeDatos {
         init {
             arregloFeed
                 .add(
-                    Feed( "Karla", 1)
+                    Feed( "Karla", "Lindo michito",1, R.drawable.gatolimon)
                 )
             arregloFeed
                 .add(
-                    Feed("Vanessa", 2)
+                    Feed("Vanessa", "Lindo michito",2,  R.drawable.gatolimon)
                 )
             arregloFeed
                 .add(
-                    Feed("Lucy", 3)
+                    Feed("Lucy", "Lindo michito",3,  R.drawable.gatofondonaranja)
                 )
         }
     }

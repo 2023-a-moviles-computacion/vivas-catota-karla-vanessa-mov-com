@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class RecyclerViewAdaptador (
 
@@ -16,10 +17,12 @@ class RecyclerViewAdaptador (
 ): RecyclerView.Adapter<RecyclerViewAdaptador.MyViewHolder>(){
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nombre: TextView
+        val descripcion: TextView
         val numero: TextView
         val imagen: ImageView
         init {
             nombre = view.findViewById(R.id.tv_nombre)
+            descripcion = view.findViewById(R.id.tv_descripcion)
             numero = view.findViewById(R.id.tv_numero)
             imagen = view.findViewById(R.id.iv_feed)
         }
@@ -51,7 +54,9 @@ class RecyclerViewAdaptador (
         val itemFeed = this.lista[position]
 
         holder.nombre.text = itemFeed.nombre
+        holder.descripcion.text = itemFeed.descripcion
         holder.numero.text = itemFeed.numero.toString()
+        Glide.with(holder.imagen.context).load(itemFeed.imagen).into(holder.imagen)
 
     }
 
