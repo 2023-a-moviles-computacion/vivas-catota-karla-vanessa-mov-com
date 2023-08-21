@@ -3,18 +3,40 @@ package com.example.deber3_recyclerview_instagram
 class BaseDeDatos {
     companion object {
         val arregloFeed = arrayListOf<Feed>()
+        val arregloStories = arrayListOf<Storie>()
         init {
             arregloFeed
                 .add(
-                    Feed( "Karla", "Lindo michito",1, R.drawable.gatolimon)
+                    Feed( "ezra", R.drawable.ezra, "Lindo michito", R.drawable.gatolimon)
                 )
             arregloFeed
                 .add(
-                    Feed("Vanessa", "Lindo michito",2,  R.drawable.gatolimon)
+                    Feed("momo", R.drawable.momo,"Lindo michito",  R.drawable.gatolimon)
                 )
             arregloFeed
                 .add(
-                    Feed("Lucy", "Lindo michito",3,  R.drawable.gatofondonaranja)
+                    Feed("lisa", R.drawable.lisa,"Lindo michito",  R.drawable.gatofondonaranja)
+                )
+
+            arregloStories
+                .add(
+                    Storie("ezra", R.drawable.ezra)
+                )
+            arregloStories
+                .add(
+                    Storie("gigi", R.drawable.gigi)
+                )
+            arregloStories
+                .add(
+                    Storie("lisa", R.drawable.lisa)
+                )
+            arregloStories
+                .add(
+                    Storie("mina", R.drawable.mina)
+                )
+            arregloStories
+                .add(
+                    Storie("momo", R.drawable.momo)
                 )
         }
     }

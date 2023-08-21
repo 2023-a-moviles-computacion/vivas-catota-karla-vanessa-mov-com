@@ -3,38 +3,42 @@ package com.example.deber3_recyclerview_instagram
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class RecyclerViewAdaptador (
+class RecyclerViewAdaptadorFeed (
 
     private val contexto: MainActivity,
     private val lista: ArrayList<Feed>,
     private val recyclerView: RecyclerView
-): RecyclerView.Adapter<RecyclerViewAdaptador.MyViewHolder>(){
+): RecyclerView.Adapter<RecyclerViewAdaptadorFeed.MyViewHolder>(){
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val nombre: TextView
+        val imgUser: ImageView
+        val user: TextView
+        val user2: TextView
         val descripcion: TextView
-        val numero: TextView
+        val likes: TextView
         val imagen: ImageView
+        //val likeBoton: Button
+        var numeroLikes = 0
         init {
-            nombre = view.findViewById(R.id.tv_nombre)
+            user = view.findViewById(R.id.tv_user)
+            imgUser = view.findViewById(R.id.iv_user)
+            user2 = view.findViewById(R.id.tv_nombre)
             descripcion = view.findViewById(R.id.tv_descripcion)
-            numero = view.findViewById(R.id.tv_numero)
+            likes = view.findViewById(R.id.tv_numero)
             imagen = view.findViewById(R.id.iv_feed)
+           // likeBoton = view.findViewById<Button>(R.id.btn_like)
+           // likeBoton.setOnClickListener { anadirLike() }
         }
 
-        /*
         fun anadirLike(){
             numeroLikes =  numeroLikes + 1
-            likesTextView.text = numeroLikes.toString()
+            likes.text = numeroLikes.toString()
             contexto.aumentarTotalLikes()
         }
-
-         */
 
     }
 
@@ -53,11 +57,12 @@ class RecyclerViewAdaptador (
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val itemFeed = this.lista[position]
 
-        holder.nombre.text = itemFeed.nombre
+        holder.user.text = itemFeed.user
+        Glide.with(holder.imgUser.context).load(itemFeed.imgUser).into(holder.imgUser)
+        holder.user2.text = itemFeed.user
         holder.descripcion.text = itemFeed.descripcion
-        holder.numero.text = itemFeed.numero.toString()
+        holder.likes.text = "9,876 Me gusta"
         Glide.with(holder.imagen.context).load(itemFeed.imagen).into(holder.imagen)
-
     }
 
     // tamano del arreglo

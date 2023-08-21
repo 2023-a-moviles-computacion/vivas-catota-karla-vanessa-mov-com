@@ -14,36 +14,48 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val recyclerView: RecyclerView = findViewById(R.id.rv_feed)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        val recyclerViewFeed: RecyclerView = findViewById(R.id.rv_feed)
+        recyclerViewFeed.layoutManager = LinearLayoutManager(this)
+        val recyclerViewStorie: RecyclerView = findViewById(R.id.rv_storie)
+        recyclerViewStorie.layoutManager = LinearLayoutManager(this)
         inicializarRecyclerView()
     }
 
-    /*
     fun aumentarTotalLikes(){
-        totalLikes = totalLikes + 1
-       /* val totalLikesTextView = findViewById<TextView>(
-            R.id.tv_total_likes
-        )
-        totalLikesTextView.text = totalLikes.toString()
-
-        */
+        //totalLikes = totalLikes + 1
+        //val totalLikesTextView = findViewById<TextView>(
+        //    R.id.tv_numero
+        //)
+        //totalLikesTextView.text = totalLikes.toString()
     }
-    */
 
 
     fun inicializarRecyclerView(){
-        val recyclerView = findViewById<RecyclerView>(R.id.rv_feed)
-        val adaptador = RecyclerViewAdaptador(
+        val recyclerViewFeed = findViewById<RecyclerView>(R.id.rv_feed)
+        val adaptadorFeed = RecyclerViewAdaptadorFeed(
             this, // Contexto
             BaseDeDatos.arregloFeed, // Arreglo datos
-            recyclerView // Recycler view
+            recyclerViewFeed // Recycler view
         )
-        recyclerView.adapter = adaptador
-        recyclerView.itemAnimator = androidx.recyclerview.widget
+        recyclerViewFeed.adapter = adaptadorFeed
+        recyclerViewFeed.itemAnimator = androidx.recyclerview.widget
             .DefaultItemAnimator()
-        recyclerView.layoutManager = androidx.recyclerview.widget
+        recyclerViewFeed.layoutManager = androidx.recyclerview.widget
             .LinearLayoutManager(this)
-        adaptador.notifyDataSetChanged()
+        adaptadorFeed.notifyDataSetChanged()
+
+        val recyclerViewStorie = findViewById<RecyclerView>(R.id.rv_storie)
+        val adaptadorStorie = RecyclerViewAdaptadorStorie(
+            this, // Contexto
+            BaseDeDatos.arregloStories, // Arreglo datos
+            recyclerViewStorie // Recycler view
+        )
+
+        recyclerViewStorie.adapter = adaptadorStorie
+        recyclerViewStorie.itemAnimator = androidx.recyclerview.widget
+            .DefaultItemAnimator()
+        recyclerViewStorie.layoutManager = androidx.recyclerview.widget
+            .LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false )
+        adaptadorStorie.notifyDataSetChanged()
     }
 }
