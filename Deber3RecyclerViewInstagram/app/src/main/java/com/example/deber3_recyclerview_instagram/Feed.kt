@@ -5,8 +5,10 @@ class Feed(
     var user: String?,
     var imgUser: Int?,
     var descripcion: String?,
-    //var numero: Int?,
-    var imagen: Int?
+    var likes: String?,
+    var imagen: Int?,
+    var hora: String?,
+
 ) {
     override fun toString(): String {
         return "${user}"

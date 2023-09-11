@@ -3,6 +3,7 @@ package com.example.deber3_recyclerview_instagram
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -16,9 +17,11 @@ class RecyclerViewAdaptadorStorie(
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nombre: TextView
         val imagen: ImageView
+        val btn_add: ImageView
         init {
             nombre = view.findViewById(R.id.tv_storie)
             imagen = view.findViewById(R.id.iv_storie)
+            btn_add = view.findViewById(R.id.btn_add) // Asigna el ImageButton
         }
     }
 
@@ -33,8 +36,16 @@ class RecyclerViewAdaptadorStorie(
         return MyViewHolder(itemView)
     }
     // Setear los datos para la iteracion
-    override fun onBindViewHolder(holder: RecyclerViewAdaptadorStorie.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val itemFeed = this.lista[position]
+
+        if (position == 0) {
+            // Muestra el ImageButton solo en el primer elemento
+            holder.btn_add.setVisibility(View.VISIBLE);
+        } else {
+            // Oculta el ImageButton en otros elementos
+            holder.btn_add.setVisibility(View.GONE);
+        }
 
         holder.nombre.text = itemFeed.nombre
         Glide.with(holder.imagen.context).load(itemFeed.imagen).into(holder.imagen)

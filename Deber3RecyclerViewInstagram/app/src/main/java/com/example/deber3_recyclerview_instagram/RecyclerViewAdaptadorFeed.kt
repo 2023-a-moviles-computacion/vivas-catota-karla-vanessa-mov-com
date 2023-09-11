@@ -19,6 +19,7 @@ class RecyclerViewAdaptadorFeed (
         val user: TextView
         val user2: TextView
         val descripcion: TextView
+        val hora: TextView
         val likes: TextView
         val imagen: ImageView
         //val likeBoton: Button
@@ -28,6 +29,7 @@ class RecyclerViewAdaptadorFeed (
             imgUser = view.findViewById(R.id.iv_user)
             user2 = view.findViewById(R.id.tv_nombre)
             descripcion = view.findViewById(R.id.tv_descripcion)
+            hora = view.findViewById(R.id.tv_hora)
             likes = view.findViewById(R.id.tv_numero)
             imagen = view.findViewById(R.id.iv_feed)
            // likeBoton = view.findViewById<Button>(R.id.btn_like)
@@ -61,8 +63,9 @@ class RecyclerViewAdaptadorFeed (
         Glide.with(holder.imgUser.context).load(itemFeed.imgUser).into(holder.imgUser)
         holder.user2.text = itemFeed.user
         holder.descripcion.text = itemFeed.descripcion
-        holder.likes.text = "9,876 Me gusta"
+        holder.likes.text = itemFeed.likes
         Glide.with(holder.imagen.context).load(itemFeed.imagen).into(holder.imagen)
+        holder.hora.text = itemFeed.hora
     }
 
     // tamano del arreglo
