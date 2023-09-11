@@ -59,7 +59,7 @@
         android:text="I. Implicito"
         app:layout_constraintBottom_toTopOf="@+id/btn_ir_list_view"
         app:layout_constraintEnd_toEndOf="@+id/btn_ir_list_view"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.294"
         app:layout_constraintStart_toStartOf="@+id/btn_ir_list_view" />
 
     <Button
@@ -86,7 +86,7 @@
         android:id="@+id/btn_google_maps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="32dp"
         android:text="G MAPS"
         app:layout_constraintBottom_toBottomOf="@+id/btn_ir_intent_implicito"
         app:layout_constraintEnd_toStartOf="@+id/btn_ir_intent_implicito"
@@ -103,5 +103,15 @@
         app:layout_constraintEnd_toEndOf="@+id/btn_google_maps"
         app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="@+id/btn_google_maps" />
+
+    <Button
+        android:id="@+id/btn_intent_firestore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Firestore"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_ir_intent_implicito"
+        app:layout_constraintStart_toEndOf="@+id/btn_ir_intent_implicito"
+        app:layout_constraintTop_toTopOf="@+id/btn_ir_intent_implicito" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
