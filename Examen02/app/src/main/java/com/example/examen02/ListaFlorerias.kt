@@ -23,13 +23,13 @@ class ListaFlorerias : AppCompatActivity() {
         setContentView(R.layout.activity_lista_florerias)
 
         // Configurando el list view
-        val listView = findViewById<ListView>(R.id.lv_florerias)
+        val listViewFlorerias = findViewById<ListView>(R.id.lv_florerias)
         adaptador = ArrayAdapter(
             this,
             android.R.layout.simple_list_item_1,
             arregloFlorerias
         )
-        listView.adapter = adaptador
+        listViewFlorerias.adapter = adaptador
         adaptador.notifyDataSetChanged()
 
         // Cargar las florerias
@@ -45,7 +45,58 @@ class ListaFlorerias : AppCompatActivity() {
                 irActividad(CrearFloreria::class.java)
             }
 
+        registerForContextMenu(listViewFlorerias)
+
     }
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        // Llenamos las opciones del menu
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_floreria, menu)
+        // Obtener el id del ArrayListSeleccionado
+        val info = menuInfo as AdapterView.AdapterContextMenuInfo
+        val id = info.position
+        idItemSeleccionado = id
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId){
+            R.id.mi_editar ->{
+                val intent = Intent(this, ActualizarFloreria::class.java )
+                intent.putExtra("idFloreriaSeleccionada", arregloFlorerias[idItemSeleccionado].id)
+                intent.putExtra("nombreFloreria", arregloFlorerias[idItemSeleccionado].nombre)
+                startActivity(intent)
+                return true
+            }
+            R.id.mi_eliminar ->{
+                    val floreriaRef = db.collection("florerias")
+
+                floreriaRef
+                        .document(arregloFlorerias[idItemSeleccionado].id)
+                        .delete() // elimina
+                        .addOnCompleteListener { /* Si todo salio bien*/ }
+                        .addOnFailureListener { /* Si algo salio mal*/ }
+
+                adaptador.remove(adaptador.getItem(idItemSeleccionado))
+                Toast.makeText(this, "Florería eliminada", Toast.LENGTH_SHORT).show()
+                adaptador.notifyDataSetChanged()
+
+                return true
+            }R.id.mi_flores ->{
+                //val intent = Intent(this, ListaFlores::class.java)
+               // intent.putExtra("idFloreriaSeleccionada", obtenerFlorerias()[idItemSeleccionado].id)
+                startActivity(intent)
+                return true
+            }
+            else -> super.onContextItemSelected(item)
+        }
+    }
+
 
     fun obtenerFlorerias(
         adaptador: ArrayAdapter<Floreria>){
@@ -79,6 +130,7 @@ class ListaFlorerias : AppCompatActivity() {
         )
         arregloFlorerias.add(nuevaFloreria)
     }
+
 
 
     fun irActividad(clase: Class<*>){
