@@ -21,15 +21,6 @@ class MainActivity : AppCompatActivity() {
         inicializarRecyclerView()
     }
 
-    fun aumentarTotalLikes(){
-        //totalLikes = totalLikes + 1
-        //val totalLikesTextView = findViewById<TextView>(
-        //    R.id.tv_numero
-        //)
-        //totalLikesTextView.text = totalLikes.toString()
-    }
-
-
     fun inicializarRecyclerView(){
         val recyclerViewFeed = findViewById<RecyclerView>(R.id.rv_feed)
         val adaptadorFeed = RecyclerViewAdaptadorFeed(

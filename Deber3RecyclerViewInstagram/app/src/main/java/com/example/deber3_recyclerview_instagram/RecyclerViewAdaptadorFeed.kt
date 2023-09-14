@@ -22,7 +22,7 @@ class RecyclerViewAdaptadorFeed (
         val hora: TextView
         val likes: TextView
         val imagen: ImageView
-        //val likeBoton: Button
+
         var numeroLikes = 0
         init {
             user = view.findViewById(R.id.tv_user)
@@ -36,11 +36,7 @@ class RecyclerViewAdaptadorFeed (
            // likeBoton.setOnClickListener { anadirLike() }
         }
 
-        fun anadirLike(){
-            numeroLikes =  numeroLikes + 1
-            likes.text = numeroLikes.toString()
-            contexto.aumentarTotalLikes()
-        }
+
 
     }
 
