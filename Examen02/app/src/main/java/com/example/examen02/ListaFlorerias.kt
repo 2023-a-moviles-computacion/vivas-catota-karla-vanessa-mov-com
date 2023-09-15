@@ -35,8 +35,7 @@ class ListaFlorerias : AppCompatActivity() {
         // Cargar las florerias
         val botonCargarFlorerias = findViewById<Button>(R.id.btn_cargar_florerias)
         botonCargarFlorerias.setOnClickListener {
-            obtenerFlorerias(adaptador);
-            Toast.makeText(this, "Cargando florerias", Toast.LENGTH_LONG).show()
+            obtenerFlorerias();
         }
 
         val botonCrearFloreria= findViewById<Button>(R.id.btn_crear_floreria)
@@ -74,7 +73,7 @@ class ListaFlorerias : AppCompatActivity() {
                 return true
             }
             R.id.mi_eliminar ->{
-                    val floreriaRef = db.collection("florerias")
+                val floreriaRef = db.collection("florerias")
 
                 floreriaRef
                         .document(arregloFlorerias[idItemSeleccionado].id)
@@ -85,11 +84,11 @@ class ListaFlorerias : AppCompatActivity() {
                 adaptador.remove(adaptador.getItem(idItemSeleccionado))
                 Toast.makeText(this, "Florería eliminada", Toast.LENGTH_SHORT).show()
                 adaptador.notifyDataSetChanged()
-
                 return true
             }R.id.mi_flores ->{
-                //val intent = Intent(this, ListaFlores::class.java)
-               // intent.putExtra("idFloreriaSeleccionada", obtenerFlorerias()[idItemSeleccionado].id)
+                val intent = Intent(this, ListaFlores::class.java)
+               // intent.putExtra("idFloreriaSeleccionada", arregloFlorerias[idItemSeleccionado].id)
+                intent.putExtra("nombreFloreria", arregloFlorerias[idItemSeleccionado].nombre)
                 startActivity(intent)
                 return true
             }
@@ -97,12 +96,11 @@ class ListaFlorerias : AppCompatActivity() {
         }
     }
 
-
     fun obtenerFlorerias(
-        adaptador: ArrayAdapter<Floreria>){
-
+        ){
         val collectionFlorerias = db.collection("florerias")
         limpiarArreglo()
+        adaptador.notifyDataSetChanged()
         collectionFlorerias
             .get()
             .addOnSuccessListener {
@@ -110,6 +108,7 @@ class ListaFlorerias : AppCompatActivity() {
                     anadirAArregloFlorerias(floreria)
                 }
                 adaptador.notifyDataSetChanged()
+                Toast.makeText(this, "Cargando florerias", Toast.LENGTH_LONG).show()
             }
             .addOnFailureListener {
                 Toast.makeText(this, "No se puede cargar", Toast.LENGTH_LONG).show()

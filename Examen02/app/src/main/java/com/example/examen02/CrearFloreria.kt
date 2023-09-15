@@ -1,6 +1,5 @@
 package com.example.examen02
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -62,8 +61,5 @@ class CrearFloreria : AppCompatActivity() {
             }
     }
 
-    fun irActividad(clase: Class<*>) {
-        val intent = Intent(this, clase)
-        startActivity(intent)
-    }
+
 }
